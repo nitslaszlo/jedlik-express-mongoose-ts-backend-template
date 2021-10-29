@@ -4,25 +4,21 @@ This template made on the basis of [Express Typescript tutorial](https://wanago.
 
 # Links (technologies)
 
-## [Express](https://expressjs.com/)
-Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+## Express
+[Express](https://expressjs.com/) is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
 ## Mongoose
-Elegant mongodb object modeling for node.js. Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
-https://mongoosejs.com/
+Elegant mongodb object modeling for node.js. [Mongoose](https://mongoosejs.com/) provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
 
 ## TypeScript
-TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
-https://www.typescriptlang.org/
+[TypeScript](https://www.typescriptlang.org/) is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 
 ## dotenv
-Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
-https://github.com/motdotla/dotenv
+[Dotenv](https://github.com/motdotla/dotenv) is a zero-dependency module that loads environment variables from a .env file into process.env.
 
 ## envalid
-Envalid is a small library for validating and accessing environment variables in Node.js programs, aiming to
+[Envalid](https://github.com/af/envalid#readme) is a small library for validating and accessing environment variables in Node.js programs, aiming to
 ensure that your program only runs when all of its environment dependencies are met.
-https://github.com/af/envalid#readme
 
 ## bcrypt
 A library to help you hash passwords.

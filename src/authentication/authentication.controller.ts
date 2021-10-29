@@ -7,6 +7,7 @@ import Controller from "../interfaces/controller.interface";
 import DataStoredInToken from "../interfaces/dataStoredInToken";
 import TokenData from "../interfaces/tokenData.interface";
 import validationMiddleware from "../middleware/validation.middleware";
+import loggerMiddleware from "../middleware/logger.middleware";
 import CreateUserDto from "../user/user.dto";
 import User from "../user/user.interface";
 import userModel from "./../user/user.model";
@@ -22,9 +23,9 @@ export default class AuthenticationController implements Controller {
     }
 
     private initializeRoutes() {
-        this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
-        this.router.post(`${this.path}/login`, validationMiddleware(LogInDto), this.loggingIn);
-        this.router.post(`${this.path}/logout`, this.loggingOut);
+        this.router.post(`${this.path}/register`, [validationMiddleware(CreateUserDto), loggerMiddleware], this.registration);
+        this.router.post(`${this.path}/login`, [validationMiddleware(LogInDto), loggerMiddleware], this.loggingIn);
+        this.router.post(`${this.path}/logout`, loggerMiddleware, this.loggingOut);
     }
 
     private registration = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
@@ -64,7 +65,7 @@ export default class AuthenticationController implements Controller {
 
     private loggingOut = (request: express.Request, response: express.Response) => {
         response.setHeader("Set-Cookie", ["Authorization=;Max-age=0"]);
-        response.send(200);
+        response.sendStatus(200);
     };
 
     private createCookie(tokenData: TokenData) {
@@ -72,7 +73,7 @@ export default class AuthenticationController implements Controller {
     }
 
     private createToken(user: User): TokenData {
-        const expiresIn = 60 * 60; // an hour
+        const expiresIn = 2 * 60 * 60; // two hours
         const secret = process.env.JWT_SECRET;
         const dataStoredInToken: DataStoredInToken = {
             _id: user._id,

@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "dbe59a81-82f7-4e53-bd71-b3b4e2d3dac5",
+		"name": "jedlik-express-mongoose-ts-backend-template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=TopSecret",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"student007\",\r\n    \"email\": \"student007@students.jedlik.eu\",\r\n    \"password\": \"student007\",\r\n    \"address\": {\r\n        \"street\": \"Szent István\",\r\n        \"city\": \"Győr\",\r\n        \"country\": \"Hungary\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=TopSecret",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"student007@students.jedlik.eu\",\r\n    \"password\":\"student007\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LogOut",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get post by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts/617c2d8979b2d0e06cd692dc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts",
+						"617c2d8979b2d0e06cd692dc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user's post/posts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjM2MxMzQwM2Y3Zjk4MGZlYzQzOGQiLCJpYXQiOjE2MzU1MzE4NDksImV4cCI6MTYzNTUzNTQ0OX0.hmpDqtLGzpLMILDVOA8qio4XkyX5ltV_HxSx8DRn3YI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users/617c3c13403f7f980fec438d/posts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"617c3c13403f7f980fec438d",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete post by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts/617c3731b1bfbb44cf5d1a6b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts",
+						"617c3731b1bfbb44cf5d1a6b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all posts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMzlhZmIxYmZiYjQ0Y2Y1ZDFhOGIiLCJpYXQiOjE2MzU1MzEyOTUsImV4cCI6MTYzNTUzNDg5NX0.hGT3DoleMQLH4CBt98yDlMKRyIxNgHcbQoBny_gqbTU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"student01\",\r\n    \"email\": \"student01@students.jedlik.eu\",\r\n    \"password\": \"#student01#\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate report",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create post 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Millió dolláros bébi 2023\",\r\n    \"content\": \"Frankie Dunn pályája során számos fantasztikus bunyóst edzett és menedzselt. Legfőbb tanítása, mely vezérli az életét is, hogy a legfontosabb az, hogy mindig védd magad. Mióta elidegenedett a lányától, Frankie jó ideje senkit sem engedett közel magához. Egyetlen barátja Hepaj, az egykori bokszoló, aki rendben tartja Frankie edzőtermét, és tudja, hogy a mogorva külső olyan embert takar, aki az elmúlt 23 évben szinte minden nap misére járt, keresve a megbocsátást, amely valahogy mégsem adatik meg neki. Aztán egy nap Maggie Fitzgerald besétál az edzőterembe. Maggie-nek sosem jutott sok semmiből, de van benne valami, ami csak keveseknek adatik meg: tudja, mit akar, és bármit hajlandó megtenni érte. Az élete állandó küzdelem, amit nyers tehetségével, kizökkenthetetlen koncentrálásával és elképesztő akaraterejével képes túlélni.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create post 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Az elveszett frigyláda fosztogatói\",\r\n    \"content\": \"1981-ben bemutatott amerikai kalandfilm Steven Spielberg rendezésében, George Lucas produceri közreműködésével és Harrison Ford főszereplésével. Az Indiana Jones-franchise első filmjében Indiana Jones a nácikkal száll szembe, akik a szövetség ládáját kutatják, seregeik legyőzhetetlenné tételéért. A lelőhelyét mutató medalion Indy egykori szerelme, Marion Ravenwood (Karen Allen) birtokában van. A film további szereplői Paul Freeman mint Indiana ellensége, a francia régész, Rene Belloq, John Rhys-Davies mint Indiana segítője, Sallah és Denholm Elliott Indy kollégája, Marcus Brody megformálójaként.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modify post",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Az elveszett frigyláda fosztogatói mod001\",\r\n    \"content\": \"1981-ben bemutatott amerikai kalandfilm Steven Spielberg rendezésében, George Lucas produceri közreműködésével és Harrison Ford főszereplésével. Az Indiana Jones-franchise első filmjében Indiana Jones a nácikkal száll szembe, akik a szövetség ládáját kutatják, seregeik legyőzhetetlenné tételéért. A lelőhelyét mutató medalion Indy egykori szerelme, Marion Ravenwood (Karen Allen) birtokában van. A film további szereplői Paul Freeman mint Indiana ellensége, a francia régész, Rene Belloq, John Rhys-Davies mint Indiana segítője, Sallah és Denholm Elliott Indy kollégája, Marcus Brody megformálójaként.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/posts/617c307fb1bfbb44cf5d1a24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"posts",
+						"617c307fb1bfbb44cf5d1a24"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

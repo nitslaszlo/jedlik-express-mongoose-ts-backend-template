@@ -4,6 +4,7 @@ import Controller from "../interfaces/controller.interface";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
 import validationMiddleware from "../middleware/validation.middleware";
+import loggerMiddleware from "../middleware/logger.middleware";
 import CreatePostDto from "./post.dto";
 import Post from "./post.interface";
 import postModel from "./post.model";
@@ -18,9 +19,13 @@ export default class PostController implements Controller {
     }
 
     private initializeRoutes() {
-        this.router.get(this.path, this.getAllPosts);
-        this.router.get(`${this.path}/:id`, this.getPostById);
-        this.router.all(`${this.path}/*`, authMiddleware).patch(`${this.path}/:id`, validationMiddleware(CreatePostDto, true), this.modifyPost).delete(`${this.path}/:id`, this.deletePost).post(this.path, authMiddleware, validationMiddleware(CreatePostDto), this.createPost);
+        this.router.get(this.path, [authMiddleware, loggerMiddleware], this.getAllPosts);
+        this.router.get(`${this.path}/:id`, [authMiddleware, loggerMiddleware], this.getPostById);
+        // eslint-disable-next-line prettier/prettier
+        this.router.all(`${this.path}/*`, [authMiddleware, loggerMiddleware])
+        .patch(`${this.path}/:id`, validationMiddleware(CreatePostDto, true), this.modifyPost)
+        .delete(`${this.path}/:id`, this.deletePost)
+        .post(this.path, authMiddleware, validationMiddleware(CreatePostDto), this.createPost);
     }
 
     private getAllPosts = async (request: express.Request, response: express.Response) => {

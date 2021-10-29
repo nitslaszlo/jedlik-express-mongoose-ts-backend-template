@@ -1,5 +1,4 @@
 import * as express from "express";
-import NotAuthorizedException from "../exceptions/NotAuthorizedException";
 import Controller from "../interfaces/controller.interface";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
@@ -19,12 +18,11 @@ export default class UserController implements Controller {
         this.router.get(`${this.path}/:id/posts`, [authMiddleware, loggerMiddleware], this.getAllPostsOfUser);
     }
 
-    private getAllPostsOfUser = async (request: RequestWithUser, response: express.Response, next: express.NextFunction) => {
+    private getAllPostsOfUser = async (request: RequestWithUser, response: express.Response) => {
         const userId = request.params.id;
         if (userId === request.user._id.toString()) {
             const posts = await this.post.find({ author: userId });
             response.send(posts);
         }
-        next(new NotAuthorizedException());
     };
 }

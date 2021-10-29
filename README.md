@@ -2,4 +2,3 @@
 
 This template made on the basis of [Express Typescript tutorial](https://wanago.io/courses/typescript-express-tutorial/).
 
-

@@ -21,47 +21,36 @@ Elegant mongodb object modeling for node.js. [Mongoose](https://mongoosejs.com/)
 ensure that your program only runs when all of its environment dependencies are met.
 
 ## bcrypt
-A library to help you hash passwords.
-https://github.com/kelektiv/node.bcrypt.js#readme
+[Bcript](https://github.com/kelektiv/node.bcrypt.js#readme) is a library to help you hash passwords.
 
 ## jsonwebtoken
-JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties. The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code
+[JSON Web Token](https://github.com/auth0/node-jsonwebtoken#readme) (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties. The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code
 (MAC) and/or encrypted.
-https://github.com/auth0/node-jsonwebtoken#readme
 
 ## class-validator
-Allows use of decorator and non-decorator based validation. Internally uses validator.js to perform validation. Class-validator works on both browser and node.js platforms.
-https://github.com/typestack/class-validator#readme
+Allows use of decorator and non-decorator based validation. Internally uses validator.js to perform validation. [Class-validator](https://github.com/typestack/class-validator#readme) works on both browser and node.js platforms.
 
 ## class-transformer
-https://github.com/typestack/class-transformer#readme
-Its ES6 and Typescript era. Nowadays you are working with classes and constructor objects more than ever. Class-transformer allows you to transform plain object to some instance of class and versa. Also it allows to serialize / deserialize object based on criteria.
+Its ES6 and Typescript era. Nowadays you are working with classes and constructor objects more than ever. [Class-transformer](https://github.com/typestack/class-transformer#readme) allows you to transform plain object to some instance of class and versa. Also it allows to serialize / deserialize object based on criteria.
 
 ## cookie-parser
-Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware.
-https://github.com/expressjs/cookie-parser#readme
+[Cookie-parser](https://github.com/expressjs/cookie-parser#readme) parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware.
 
 ## ESlint
-ESLint statically analyzes your code to quickly find problems. Many problems ESLint finds can be automatically fixed. Preprocess code, use custom parsers, and write your own rules that work alongside ESLint's built-in rules. You can customize ESLint to work exactly the way you need it for your project.
-https://eslint.org/
+[ESLint](https://eslint.org/) statically analyzes your code to quickly find problems. Many problems ESLint finds can be automatically fixed. Preprocess code, use custom parsers, and write your own rules that work alongside ESLint's built-in rules. You can customize ESLint to work exactly the way you need it for your project.
 
 ## Prettier
-An opinionated code formatter. Supports many languages, integrates with most editors.
-https://prettier.io/
+[Prettier](https://prettier.io/) an opinionated code formatter. Supports many languages, integrates with most editors.
 
 ## Jest
-Jest is a delightful JavaScript Testing Framework with a focus on simplicity. It works with projects using: Babel, TypeScript, Node, React, Angular, Vue and more!
-https://jestjs.io/
+[Jest](https://jestjs.io/) is a delightful JavaScript Testing Framework with a focus on simplicity. It works with projects using: Babel, TypeScript, Node, React, Angular, Vue and more!
 
 ## ts-jest
-A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
-https://kulshekhar.github.io/ts-jest/
+[ts-jest](https://kulshekhar.github.io/ts-jest/) is a Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
 
 ## ts-node
-ts-node is a TypeScript execution engine and REPL for Node.js.
+[ts-node](https://typestrong.org/ts-node/docs/) is a TypeScript execution engine and REPL for Node.js.
 It JIT transforms TypeScript into JavaScript, enabling you to directly execute TypeScript on Node.js without precompiling. This is accomplished by hooking node's module loading APIs, enabling it to be used seamlessly alongside other Node.js tools and libraries.
-https://typestrong.org/ts-node/docs/
 
 ## nodemon
-Nodemon is a utility depended on by over 1.5 million projects, that will monitor for any changes in your source and automatically restart your server.
-https://nodemon.io/
+[Nodemon](https://nodemon.io/) is a utility depended on by over 1.5 million projects, that will monitor for any changes in your source and automatically restart your server.

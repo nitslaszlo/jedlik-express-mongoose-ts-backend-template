@@ -2,7 +2,7 @@
 
 This template made on the basis of [Express Typescript tutorial](https://wanago.io/courses/typescript-express-tutorial/).
 
-# Links (technologies)
+# Links (technologies, software)
 
 ## Express
 [Express](https://expressjs.com/) is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
@@ -54,3 +54,9 @@ It JIT transforms TypeScript into JavaScript, enabling you to directly execute T
 
 ## nodemon
 [Nodemon](https://nodemon.io/) is a utility depended on by over 1.5 million projects, that will monitor for any changes in your source and automatically restart your server.
+
+## MongoDB Cloud, Atlas
+MongoDB Cloud is the best way to build data-driven applications. The core of MongoDB Cloud is [MongoDB Atlas](https://www.mongodb.com/cloud), a fully managed cloud database for modern applications. Atlas is the best way to run MongoDB, the leading modern database. MongoDB’s document model is the fastest way to innovate, bringing flexibility and ease of use to the database.
+
+## Postman
+[Postman](https://www.postman.com/) is an API platform for building, testing and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.

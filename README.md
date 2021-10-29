@@ -4,9 +4,8 @@ This template made on the basis of [Express Typescript tutorial](https://wanago.
 
 # Links (technologies)
 
-## Express
+## [Express](https://expressjs.com/)
 Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-https://expressjs.com/
 
 ## Mongoose
 Elegant mongodb object modeling for node.js. Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.

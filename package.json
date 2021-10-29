@@ -43,7 +43,6 @@
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
-        "husky": "^7.0.4",
         "jest": "^27.3.1",
         "node-gyp": "^8.3.0",
         "nodemon": "^2.0.14",
@@ -75,10 +74,5 @@
             "src/**/*.{ts,js}",
             "!src/**/*.d.ts"
         ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint"
-        }
     }
 }

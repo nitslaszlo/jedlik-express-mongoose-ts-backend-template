@@ -21,8 +21,6 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, [authMiddleware, loggerMiddleware], this.getAllPosts);
         this.router.get(`${this.path}/:id`, [authMiddleware, loggerMiddleware], this.getPostById);
-        // eslint-disable-next-line prettier/prettier
-        // this.router.all(`${this.path}/*`, [authMiddleware, loggerMiddleware])
         this.router.patch(`${this.path}/:id`, [authMiddleware, loggerMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, [authMiddleware, loggerMiddleware], this.deletePost);
         this.router.post(this.path, [authMiddleware, loggerMiddleware, validationMiddleware(CreatePostDto)], this.createPost);

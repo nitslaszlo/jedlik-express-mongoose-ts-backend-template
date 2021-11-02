@@ -22,10 +22,10 @@ export default class PostController implements Controller {
         this.router.get(this.path, [authMiddleware, loggerMiddleware], this.getAllPosts);
         this.router.get(`${this.path}/:id`, [authMiddleware, loggerMiddleware], this.getPostById);
         // eslint-disable-next-line prettier/prettier
-        this.router.all(`${this.path}/*`, [authMiddleware, loggerMiddleware])
-        .patch(`${this.path}/:id`, validationMiddleware(CreatePostDto, true), this.modifyPost)
-        .delete(`${this.path}/:id`, this.deletePost)
-        .post(this.path, authMiddleware, validationMiddleware(CreatePostDto), this.createPost);
+        // this.router.all(`${this.path}/*`, [authMiddleware, loggerMiddleware])
+        this.router.patch(`${this.path}/:id`, [authMiddleware, loggerMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
+        this.router.delete(`${this.path}/:id`, [authMiddleware, loggerMiddleware], this.deletePost);
+        this.router.post(this.path, [authMiddleware, loggerMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
     }
 
     private getAllPosts = async (request: express.Request, response: express.Response) => {

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dbe59a81-82f7-4e53-bd71-b3b4e2d3dac5",
+		"_postman_id": "41212825-399d-4369-973f-54b433a9c520",
 		"name": "jedlik-express-mongoose-ts-backend-template",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,17 +12,10 @@
 			},
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=TopSecret",
-						"type": "text",
-						"disabled": true
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"student007\",\r\n    \"email\": \"student007@students.jedlik.eu\",\r\n    \"password\": \"student007\",\r\n    \"address\": {\r\n        \"street\": \"Szent István\",\r\n        \"city\": \"Győr\",\r\n        \"country\": \"Hungary\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"student007\",\r\n    \"email\": \"student007@students.jedlik.eu\",\r\n    \"password\": \"student007\",\r\n    \"address\": {\r\n        \"street\": \"Szent István út 7.\",\r\n        \"city\": \"Győr\",\r\n        \"country\": \"Hungary\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -59,13 +52,7 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=TopSecret",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"email\":\"student007@students.jedlik.eu\",\r\n    \"password\":\"student007\" \r\n}",
@@ -126,13 +113,7 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -164,13 +145,7 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjM2MxMzQwM2Y3Zjk4MGZlYzQzOGQiLCJpYXQiOjE2MzU1MzE4NDksImV4cCI6MTYzNTUzNTQ0OX0.hmpDqtLGzpLMILDVOA8qio4XkyX5ltV_HxSx8DRn3YI",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -201,13 +176,7 @@
 			"name": "delete post by id",
 			"request": {
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -239,13 +208,7 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMzlhZmIxYmZiYjQ0Y2Y1ZDFhOGIiLCJpYXQiOjE2MzU1MzEyOTUsImV4cCI6MTYzNTUzNDg5NX0.hGT3DoleMQLH4CBt98yDlMKRyIxNgHcbQoBny_gqbTU",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"student01\",\r\n    \"email\": \"student01@students.jedlik.eu\",\r\n    \"password\": \"#student01#\"\r\n}"
@@ -271,13 +234,7 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -300,13 +257,7 @@
 			"name": "create post 1",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Cookie",
-						"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"title\": \"Millió dolláros bébi 2023\",\r\n    \"content\": \"Frankie Dunn pályája során számos fantasztikus bunyóst edzett és menedzselt. Legfőbb tanítása, mely vezérli az életét is, hogy a legfontosabb az, hogy mindig védd magad. Mióta elidegenedett a lányától, Frankie jó ideje senkit sem engedett közel magához. Egyetlen barátja Hepaj, az egykori bokszoló, aki rendben tartja Frankie edzőtermét, és tudja, hogy a mogorva külső olyan embert takar, aki az elmúlt 23 évben szinte minden nap misére járt, keresve a megbocsátást, amely valahogy mégsem adatik meg neki. Aztán egy nap Maggie Fitzgerald besétál az edzőterembe. Maggie-nek sosem jutott sok semmiből, de van benne valami, ami csak keveseknek adatik meg: tudja, mit akar, és bármit hajlandó megtenni érte. Az élete állandó küzdelem, amit nyers tehetségével, kizökkenthetetlen koncentrálásával és elképesztő akaraterejével képes túlélni.\"\r\n}",
@@ -404,18 +355,18 @@
 		"type": "apikey",
 		"apikey": [
 			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			},
+			{
 				"key": "value",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdjMjJjMWQxZWU4ODA0MzVmMWNkZjciLCJpYXQiOjE2MzU1MjczNzksImV4cCI6MTYzNTUzMDk3OX0.icBM-bOzPdkGjLlcRbrYRdCAGDLgL_rElFPHJTOSBno",
+				"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTkzZjQ4ZjZlOWNiOGM5ZTdiY2YyODQiLCJpYXQiOjE2MzcwODcwMTgsImV4cCI6MTYzNzA5NDIxOH0.TFrDsmygKJknYmZPDg4qdN1KFP62YQ3MCJ1MieQsKW4",
 				"type": "string"
 			},
 			{
 				"key": "key",
-				"value": "Authorization",
-				"type": "string"
-			},
-			{
-				"key": "in",
-				"value": "header",
+				"value": "Cookie",
 				"type": "string"
 			}
 		]

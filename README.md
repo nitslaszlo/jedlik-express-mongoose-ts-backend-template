@@ -59,4 +59,5 @@ It JIT transforms TypeScript into JavaScript, enabling you to directly execute T
 MongoDB Cloud is the best way to build data-driven applications. The core of MongoDB Cloud is [MongoDB Atlas](https://www.mongodb.com/cloud), a fully managed cloud database for modern applications. Atlas is the best way to run MongoDB, the leading modern database. MongoDB’s document model is the fastest way to innovate, bringing flexibility and ease of use to the database.
 
 ## Postman
-[Postman](https://www.postman.com/) is an API platform for building, testing and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.
+[Postman](https://www.postman.com/) is an API platform for building, testing and using APIs. Postman simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.<br>
+[Download Postman](https://www.postman.com/downloads/)

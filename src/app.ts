@@ -3,6 +3,7 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
+import loggerMiddleware from "./middleware/logger.middleware";
 
 export default class App {
     public app: express.Application;
@@ -24,6 +25,7 @@ export default class App {
     private initializeMiddlewares() {
         this.app.use(express.json());
         this.app.use(cookieParser());
+        this.app.use(loggerMiddleware);
     }
 
     private initializeErrorHandling() {

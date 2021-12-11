@@ -1,6 +1,7 @@
 import * as express from "express";
 import Controller from "../interfaces/controller.interface";
 import userModel from "../user/user.model";
+import HttpException from "../exceptions/HttpException";
 
 export default class ReportController implements Controller {
     public path = "/report";
@@ -16,54 +17,58 @@ export default class ReportController implements Controller {
     }
 
     private generateReport = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-        const usersByCountries = await this.user.aggregate([
-            {
-                $match: {
-                    "address.country": {
-                        $exists: true,
-                    },
-                },
-            },
-            {
-                $group: {
-                    _id: {
-                        country: "$address.country",
-                    },
-                    users: {
-                        $push: {
-                            _id: "$_id",
-                            name: "$name",
+        try {
+            const usersByCountries = await this.user.aggregate([
+                {
+                    $match: {
+                        "address.country": {
+                            $exists: true,
                         },
                     },
-                    count: {
-                        $sum: 1,
+                },
+                {
+                    $group: {
+                        _id: {
+                            country: "$address.country",
+                        },
+                        users: {
+                            $push: {
+                                _id: "$_id",
+                                name: "$name",
+                            },
+                        },
+                        count: {
+                            $sum: 1,
+                        },
                     },
                 },
-            },
-            {
-                $lookup: {
-                    from: "posts",
-                    localField: "users._id",
-                    foreignField: "author",
-                    as: "articles",
-                },
-            },
-            {
-                $addFields: {
-                    amountOfArticles: {
-                        $size: "$articles",
+                {
+                    $lookup: {
+                        from: "posts",
+                        localField: "users._id",
+                        foreignField: "author",
+                        as: "articles",
                     },
                 },
-            },
-            {
-                $sort: {
-                    amountOfArticles: 1,
+                {
+                    $addFields: {
+                        amountOfArticles: {
+                            $size: "$articles",
+                        },
+                    },
                 },
-            },
-        ]);
-        response.send({
-            usersByCountries,
-        });
-        next();
+                {
+                    $sort: {
+                        amountOfArticles: 1,
+                    },
+                },
+            ]);
+            response.send({
+                usersByCountries,
+            });
+            next();
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
     };
 }

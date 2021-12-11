@@ -16,3 +16,7 @@ export default function validationMiddleware(type: any, skipMissingProperties = 
         });
     };
 }
+
+// Links:
+// class-transformer: https://www.jsdocs.io/package/class-transformer#plainToInstance
+// class-validator: https://github.com/typestack/class-validator

@@ -13,5 +13,5 @@ export default class CreateUserDto {
 
     @IsOptional()
     @ValidateNested()
-    public address: CreateAddressDto;
+    public address?: CreateAddressDto;
 }

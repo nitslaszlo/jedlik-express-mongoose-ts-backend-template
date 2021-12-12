@@ -24,7 +24,7 @@ export default class UserController implements Controller {
 
     private initializeRoutes() {
         this.router.get(`${this.path}/posts/:id`, authMiddleware, this.getAllPostsOfUserByID);
-        this.router.get(`${this.path}/posts/`, authMiddleware, this.getAllPostsOfUser);
+        this.router.get(`${this.path}/posts/`, authMiddleware, this.getAllPostsOfLoggedUser);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getUserById);
         this.router.get(this.path, authMiddleware, this.getAllUsers);
 
@@ -98,7 +98,7 @@ export default class UserController implements Controller {
         }
     };
 
-    private getAllPostsOfUser = async (request: RequestWithUser, response: express.Response, next: express.NextFunction) => {
+    private getAllPostsOfLoggedUser = async (request: RequestWithUser, response: express.Response, next: express.NextFunction) => {
         try {
             const id = request.user._id.toString(); // Stored user's ID in Cookie
             const posts = await this.post.find({ author: id });

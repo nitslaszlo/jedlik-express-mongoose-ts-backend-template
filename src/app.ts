@@ -22,6 +22,10 @@ export default class App {
         });
     }
 
+    public getServer(): express.Application {
+        return this.app;
+    }
+
     private initializeMiddlewares() {
         this.app.use(express.json());
         this.app.use(cookieParser());

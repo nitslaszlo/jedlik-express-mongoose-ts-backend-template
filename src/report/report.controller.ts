@@ -18,10 +18,10 @@ export default class ReportController implements Controller {
 
     private generateReport = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
         try {
-            const usersByCountries = await this.user.aggregate([
+            const usersByCities = await this.user.aggregate([
                 {
                     $match: {
-                        "address.country": {
+                        "address.city": {
                             $exists: true,
                         },
                     },
@@ -29,7 +29,7 @@ export default class ReportController implements Controller {
                 {
                     $group: {
                         _id: {
-                            country: "$address.country",
+                            city: "$address.city",
                         },
                         users: {
                             $push: {
@@ -64,7 +64,7 @@ export default class ReportController implements Controller {
                 },
             ]);
             response.send({
-                usersByCountries,
+                usersByCities,
             });
             next();
         } catch (error) {

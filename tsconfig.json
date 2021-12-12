@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "types": [
       "node",
       "jest"

@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"student007\",\r\n    \"email\": \"student007@students.jedlik.eu\",\r\n    \"password\": \"student007\",\r\n    \"address\": {\r\n        \"street\": \"Szent István út 7.\",\r\n        \"city\": \"Győr\",\r\n        \"country\": \"Hungary\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"student006\",\r\n    \"email\": \"student006@jedlik.eu\",\r\n    \"password\": \"student006\",\r\n    \"address\": {\r\n        \"street\": \"Sport útca 1.\",\r\n        \"city\": \"Écs\",\r\n        \"country\": \"Hungary\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,7 +55,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"student007@students.jedlik.eu\",\r\n    \"password\":\"student007\" \r\n}",
+					"raw": "{\r\n    \"email\":\"student001@jedlik.eu\",\r\n    \"password\":\"student001\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +124,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/posts/617c2d8979b2d0e06cd692dc",
+					"raw": "http://localhost:5000/posts/61b3a4f6156a68783192a798",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -132,14 +132,14 @@
 					"port": "5000",
 					"path": [
 						"posts",
-						"617c2d8979b2d0e06cd692dc"
+						"61b3a4f6156a68783192a798"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "get user's post/posts",
+			"name": "get user's post/posts by ID",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -156,7 +156,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/users/617c3c13403f7f980fec438d/posts/",
+					"raw": "http://localhost:5000/users/posts/61b5e9c0f39e4edcf5b8a3b9",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -164,9 +164,8 @@
 					"port": "5000",
 					"path": [
 						"users",
-						"617c3c13403f7f980fec438d",
 						"posts",
-						""
+						"61b5e9c0f39e4edcf5b8a3b9"
 					]
 				}
 			},
@@ -187,7 +186,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/posts/617c3731b1bfbb44cf5d1a6b",
+					"raw": "http://localhost:5000/posts/61b3a3ac2f1e327166396347",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -195,14 +194,14 @@
 					"port": "5000",
 					"path": [
 						"posts",
-						"617c3731b1bfbb44cf5d1a6b"
+						"61b3a3ac2f1e327166396347"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "get all posts",
+			"name": "get all posts of logged user",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -214,13 +213,14 @@
 					"raw": "{\r\n    \"name\": \"student01\",\r\n    \"email\": \"student01@students.jedlik.eu\",\r\n    \"password\": \"#student01#\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/posts",
+					"raw": "http://localhost:5000/users/posts",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"users",
 						"posts"
 					]
 				}
@@ -349,19 +349,107 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/users/61b5e9c0f39e4edcf5b8a3b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"61b5e9c0f39e4edcf5b8a3b9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyUserByID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Student12345567889\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users/61b38a667507c0b66ef21816",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"61b38a667507c0b66ef21816"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/users/61b3afdd33784a594b4c575b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"61b3afdd33784a594b4c575b"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "in",
-				"value": "header",
+				"key": "value",
+				"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI1ZjA5Y2YzOWU0ZWRjZjViOGEzZDQiLCJpYXQiOjE2MzkzMzExNTMsImV4cCI6MTYzOTQxNzU1M30.8kOZSDxwqTtSKC_cNA0KhIsV8IHu8CHAmw6_bxNVJG8; HttpOnly; Max-Age=86400",
 				"type": "string"
 			},
 			{
-				"key": "value",
-				"value": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTkzZjQ4ZjZlOWNiOGM5ZTdiY2YyODQiLCJpYXQiOjE2MzcwODcwMTgsImV4cCI6MTYzNzA5NDIxOH0.TFrDsmygKJknYmZPDg4qdN1KFP62YQ3MCJ1MieQsKW4",
+				"key": "in",
+				"value": "header",
 				"type": "string"
 			},
 			{

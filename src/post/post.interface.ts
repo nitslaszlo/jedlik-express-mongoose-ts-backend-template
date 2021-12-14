@@ -1,5 +1,7 @@
+import { Types } from "mongoose";
 export default interface Post {
-    author: string;
+    _id: Types.ObjectId | string;
+    author: Types.ObjectId | string;
     content: string;
     title: string;
 }

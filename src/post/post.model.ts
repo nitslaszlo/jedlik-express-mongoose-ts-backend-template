@@ -1,11 +1,11 @@
-import * as mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import Post from "./post.interface";
 
-const postSchema = new mongoose.Schema(
+const postSchema = new Schema<Post>(
     {
         author: {
             ref: "User",
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
         },
         content: String,
         title: String,
@@ -13,6 +13,6 @@ const postSchema = new mongoose.Schema(
     { versionKey: false },
 );
 
-const postModel = mongoose.model<Post & mongoose.Document>("Post", postSchema);
+const postModel = model<Post>("Post", postSchema);
 
 export default postModel;

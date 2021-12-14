@@ -1,11 +1,11 @@
-import * as express from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import Controller from "../interfaces/controller.interface";
 import userModel from "../user/user.model";
 import HttpException from "../exceptions/HttpException";
 
 export default class ReportController implements Controller {
     public path = "/report";
-    public router = express.Router();
+    public router = Router();
     private user = userModel;
 
     constructor() {
@@ -16,7 +16,7 @@ export default class ReportController implements Controller {
         this.router.get(`${this.path}`, this.generateReport);
     }
 
-    private generateReport = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private generateReport = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const usersByCities = await this.user.aggregate([
                 {
@@ -63,7 +63,7 @@ export default class ReportController implements Controller {
                     },
                 },
             ]);
-            response.send({
+            res.send({
                 usersByCities,
             });
             next();

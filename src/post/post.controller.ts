@@ -1,5 +1,5 @@
-import * as express from "express";
-import * as mongoose from "mongoose";
+import { Router, Request, Response, NextFunction } from "express";
+import { Types } from "mongoose";
 import PostNotFoundException from "../exceptions/PostNotFoundException";
 import IdNotValidException from "../exceptions/IdNotValidException";
 import HttpException from "../exceptions/HttpException";
@@ -13,7 +13,7 @@ import postModel from "./post.model";
 
 export default class PostController implements Controller {
     public path = "/posts";
-    public router = express.Router();
+    public router = Router();
     private post = postModel;
 
     constructor() {
@@ -28,23 +28,23 @@ export default class PostController implements Controller {
         this.router.post(this.path, [authMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
     }
 
-    private getAllPosts = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
             // const posts = await this.post.find().populate("author", "-password");
             const posts = await this.post.find();
-            response.send(posts);
+            res.send(posts);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
     };
 
-    private getPostById = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private getPostById = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = request.params.id;
-            if (mongoose.Types.ObjectId.isValid(id)) {
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
                 const post = await this.post.findById(id).populate("author", "-password");
                 if (post) {
-                    response.send(post);
+                    res.send(post);
                 } else {
                     next(new PostNotFoundException(id));
                 }
@@ -56,45 +56,47 @@ export default class PostController implements Controller {
         }
     };
 
-    private modifyPost = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private modifyPost = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = request.params.id;
-            if (mongoose.Types.ObjectId.isValid(id)) {
-                const postData: Post = request.body;
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
+                const postData: Post = req.body;
                 const post = await this.post.findByIdAndUpdate(id, postData, { new: true });
                 if (post) {
-                    response.send(post);
+                    res.send(post);
                 } else {
                     next(new PostNotFoundException(id));
                 }
             } else {
                 next(new IdNotValidException(id));
             }
-        } catch (error) {}
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
     };
 
-    private createPost = async (request: RequestWithUser, response: express.Response, next: express.NextFunction) => {
+    private createPost = async (req: RequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const postData: Post = request.body;
+            const postData: Post = req.body;
             const createdPost = new this.post({
                 ...postData,
-                author: request.user._id,
+                author: req.user._id,
             });
             const savedPost = await createdPost.save();
             await savedPost.populate("author", "-password");
-            response.send(savedPost);
+            res.send(savedPost);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
     };
 
-    private deletePost = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private deletePost = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = request.params.id;
-            if (mongoose.Types.ObjectId.isValid(id)) {
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
                 const successResponse = await this.post.findByIdAndDelete(id);
                 if (successResponse) {
-                    response.sendStatus(200);
+                    res.sendStatus(200);
                 } else {
                     next(new PostNotFoundException(id));
                 }

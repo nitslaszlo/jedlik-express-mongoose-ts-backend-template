@@ -2,14 +2,17 @@
    https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 
 2. Add scripts to pakage.json file:
+	...
 	"start": "node ./dist/server.js",
         "compile": "tsc",
         "postinstall": "tsc",
+		...
 
+3. Add "dist" folder to .gitignore
 
-3. Create favicon.ico and save to project root
+4. Create favicon.ico and save to project root
 
-4. Serve favicon.ico requests in app.ts:
+5. Serve favicon.ico requests in app.ts:
 
 	import * as favicon from "serve-favicon";
 	import * as path from "path";
@@ -22,16 +25,22 @@
             console.log(error.message);
         }
 	...
-5. Deploy on Heroku
 
-6. Set Config Vars on Heroku:
-	help/Heroku_config_vars.jpg
+6. Compare and update your package.json, tsconfig.json, app.ts and server.ts files.
 
-7. Check console on Heroku with Heroku CLI:
-	- cmd
+7. Push changes to GitHub repo
+
+8. Deploy on Heroku
+	- Deploy_on_Heroku.pdf
+
+9. Set Config Vars on Heroku:
+	- Heroku_config_vars.jpg
+
+10. Check console on Heroku with Heroku CLI:
+	- cmd.exe
 	- heroku logs --tail --app jedlik-expr-mongoose-backend
 
-8. Check backend APIs endpoints with Postman:
-	POST https://jedlik-expr-mongoose-backend.herokuapp.com/auth/login
+11. Check your backend APIs endpoints with Postman:
+	- POST https://jedlik-expr-mongoose-backend.herokuapp.com/auth/login
 
 

@@ -1,2 +1,37 @@
 1. Download and install Heroku CLI
    https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+2. Add scripts to pakage.json file:
+	"start": "node ./dist/server.js",
+        "compile": "tsc",
+        "postinstall": "tsc",
+
+
+3. Create favicon.ico and save to project root
+
+4. Serve favicon.ico requests in app.ts:
+
+	import * as favicon from "serve-favicon";
+	import * as path from "path";
+	...
+
+	private initializeMiddlewares() {
+        try {
+            this.app.use(favicon(path.join(__dirname, "../favicon.ico")));
+        } catch (error) {
+            console.log(error.message);
+        }
+	...
+5. Deploy on Heroku
+
+6. Set Config Vars on Heroku:
+	help/Heroku_config_vars.jpg
+
+7. Check console on Heroku with Heroku CLI:
+	- cmd
+	- heroku logs --tail --app jedlik-expr-mongoose-backend
+
+8. Check backend APIs endpoints with Postman:
+	POST https://jedlik-expr-mongoose-backend.herokuapp.com/auth/login
+
+

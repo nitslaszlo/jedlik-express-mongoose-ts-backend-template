@@ -7,7 +7,7 @@
     "alwaysStrict": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,
-    "esModuleInterop": true,
+    // "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

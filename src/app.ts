@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import * as favicon from "serve-favicon";
 import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
-=======
-import favicon from "serve-favicon";
-import path from "path";
-import cookieParser from "cookie-parser";
-import express from "express";
->>>>>>> 458692dc5d344fd9ce037cc618d3b34b26a4c993
 import * as mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";

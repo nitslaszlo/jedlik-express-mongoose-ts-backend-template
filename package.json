@@ -12,6 +12,10 @@
         "url": "https://github.com/nitslaszlo/jedlik-express-mongoose-ts-backend-template"
     },
     "scripts": {
+        "start": "node ./dist/server.js",
+        "compile": "tsc",
+        "compile:watch": "tsc --watch",
+        "postinstall": "tsc",
         "dev": "nodemon",
         "format": "prettier --write ./src",
         "lint": "eslint ./src --ext .vue,.js,.ts",
@@ -39,6 +43,7 @@
         "@types/jsonwebtoken": "^8.5.6",
         "@types/node": "^16.11.12",
         "@types/supertest": "^2.0.11",
+        "@types/validator": "^13.7.0",
         "@typescript-eslint/eslint-plugin": "^4.32.0",
         "@typescript-eslint/parser": "^4.32.0",
         "eslint": "^7.32.0",

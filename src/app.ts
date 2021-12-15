@@ -1,7 +1,7 @@
-import favicon from "serve-favicon";
-import path from "path";
-import cookieParser from "cookie-parser";
-import express from "express";
+import * as favicon from "serve-favicon";
+import * as path from "path";
+import * as cookieParser from "cookie-parser";
+import * as express from "express";
 import * as mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
@@ -33,15 +33,15 @@ export default class App {
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:
-        this.app.use((req, res, next) => {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested, Content-Type, Accept Authorization");
-            if (req.method === "OPTIONS") {
-                res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
-                return res.status(200).json({});
-            }
-            next();
-        });
+        // this.app.use((req, res, next) => {
+        //     res.header("Access-Control-Allow-Origin", "*");
+        //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested, Content-Type, Accept Authorization");
+        //     if (req.method === "OPTIONS") {
+        //         res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
+        //         return res.status(200).json({});
+        //     }
+        //     next();
+        // });
         this.app.use(loggerMiddleware);
     }
 

@@ -1,62 +1,41 @@
-import * as favicon from "serve-favicon";
-import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as mongoose from "mongoose";
-import Controller from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";
-
 export default class App {
-    public app: express.Application;
-
-    constructor(controllers: Controller[]) {
+    app;
+    constructor(controllers) {
         this.app = express();
         this.connectToTheDatabase();
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
         this.initializeErrorHandling();
     }
-
-    public listen(): void {
+    listen() {
         this.app.listen(process.env.PORT, () => {
             console.log(`App listening on the port ${process.env.PORT}`);
         });
     }
-
-    public getServer(): express.Application {
+    getServer() {
         return this.app;
     }
-
-    private initializeMiddlewares() {
-        this.app.use(favicon(path.join(__dirname, "favicon.ico")));
+    initializeMiddlewares() {
         this.app.use(express.json());
         this.app.use(cookieParser());
-        // Enabled CORS:
-        // this.app.use((req, res, next) => {
-        //     res.header("Access-Control-Allow-Origin", "*");
-        //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested, Content-Type, Accept Authorization");
-        //     if (req.method === "OPTIONS") {
-        //         res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
-        //         return res.status(200).json({});
-        //     }
-        //     next();
-        // });
         this.app.use(loggerMiddleware);
     }
-
-    private initializeErrorHandling() {
+    initializeErrorHandling() {
         this.app.use(errorMiddleware);
     }
-
-    private initializeControllers(controllers: Controller[]) {
+    initializeControllers(controllers) {
         controllers.forEach(controller => {
             this.app.use("/", controller.router);
         });
     }
-
-    private connectToTheDatabase() {
+    connectToTheDatabase() {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
         mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`);
     }
 }
+//# sourceMappingURL=app.js.map

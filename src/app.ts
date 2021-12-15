@@ -1,5 +1,7 @@
-import * as cookieParser from "cookie-parser";
-import * as express from "express";
+import favicon from "serve-favicon";
+import path from "path";
+import cookieParser from "cookie-parser";
+import express from "express";
 import * as mongoose from "mongoose";
 import Controller from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
@@ -27,6 +29,7 @@ export default class App {
     }
 
     private initializeMiddlewares() {
+        this.app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:

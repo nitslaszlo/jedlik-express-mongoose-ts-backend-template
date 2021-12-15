@@ -29,7 +29,12 @@ export default class App {
     }
 
     private initializeMiddlewares() {
-        this.app.use(favicon(path.join(__dirname, "favicon.ico")));
+        try {
+            this.app.use(favicon(path.join(__dirname, "favicon.ico")));
+        } catch (error) {
+            console.log(error.message);
+        }
+
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:

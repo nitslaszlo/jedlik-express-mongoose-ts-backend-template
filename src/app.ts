@@ -30,7 +30,7 @@ export default class App {
 
     private initializeMiddlewares() {
         try {
-            this.app.use(favicon(path.join(__dirname, "favicon.ico")));
+            this.app.use(favicon(path.join(__dirname, "../favicon.ico")));
         } catch (error) {
             console.log(error.message);
         }

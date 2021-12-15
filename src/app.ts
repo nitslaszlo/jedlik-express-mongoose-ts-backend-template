@@ -1,5 +1,5 @@
-import * as favicon from "serve-favicon";
-import * as path from "path";
+// import * as favicon from "serve-favicon";
+// import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as mongoose from "mongoose";

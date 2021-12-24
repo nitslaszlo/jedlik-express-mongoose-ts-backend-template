@@ -40,12 +40,13 @@ export default class App {
         // Enabled CORS:
         this.app.use((req, res, next) => {
             res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
             res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, Content-Type, Accept Authorization");
             res.setHeader("Access-Control-Allow-Credentials", "true");
-            if (req.method === "OPTIONS") {
-                res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
-                return res.status(200).json({});
-            }
+            // if (req.method === "OPTIONS") {
+            //     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
+            //     return res.status(200).json({});
+            // }
             next();
         });
         this.app.use(loggerMiddleware);

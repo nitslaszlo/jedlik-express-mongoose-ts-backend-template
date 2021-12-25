@@ -39,9 +39,9 @@ export default class App {
         // Enabled CORS:
         this.app.use((req, res, next) => {
             res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-            res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
+            res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE, OPTIONS");
             // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, X-Token, Content-Type, Accept Authorization");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie, Cookie");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-PINGOTHER, Set-Cookie, Cookie");
             res.header("Access-Control-Allow-Credentials", "true");
             res.header("Access-Control-Expose-Headers", "Set-Cookie, Cookie");
             // if (req.method === "OPTIONS") {

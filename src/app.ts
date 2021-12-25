@@ -41,7 +41,7 @@ export default class App {
         this.app.use((req, res, next) => {
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
-            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, Content-Type, Accept Authorization");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, X-Token, Content-Type, Accept Authorization");
             res.setHeader("Access-Control-Allow-Credentials", "true");
             // if (req.method === "OPTIONS") {
             //     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");

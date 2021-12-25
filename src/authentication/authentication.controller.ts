@@ -42,7 +42,7 @@ export default class AuthenticationController implements Controller {
                 });
                 user.password = undefined;
                 const tokenData: TokenData = this.createToken(user);
-                res.setHeader("Authorization", [this.createCookie(tokenData)]);
+                res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
                 res.send(user);
             }
         } catch (error) {
@@ -59,7 +59,7 @@ export default class AuthenticationController implements Controller {
                 if (isPasswordMatching) {
                     user.password = undefined;
                     const tokenData = this.createToken(user);
-                    res.setHeader("Authorization", [this.createCookie(tokenData)]);
+                    res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
                     res.send(user);
                 } else {
                     next(new WrongCredentialsException());
@@ -73,7 +73,7 @@ export default class AuthenticationController implements Controller {
     };
 
     private loggingOut = (req: Request, res: Response) => {
-        res.setHeader("Authorization", ["Authorization=;Max-age=0"]);
+        res.setHeader("Set-Cookie", ["Authorization=;Max-age=0"]);
         res.sendStatus(200);
     };
 

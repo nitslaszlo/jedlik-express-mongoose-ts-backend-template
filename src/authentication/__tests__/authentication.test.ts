@@ -6,7 +6,6 @@ import AuthenticationController from "../../authentication/authentication.contro
 // import UserController from "../../user/user.controller";
 import validateEnv from "../../utils/validateEnv";
 import * as request from "supertest";
-import { Express } from "express-serve-static-core";
 
 validateEnv();
 

@@ -42,7 +42,7 @@ export default class App {
             cors({
                 origin: "http://localhost:8080",
                 credentials: true,
-                exposedHeaders: ["Cookie", "Authorization"],
+                exposedHeaders: ["set-cookie"],
             }),
         );
         // this.app.use((req, res, next) => {

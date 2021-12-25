@@ -78,7 +78,7 @@ export default class AuthenticationController implements Controller {
     };
 
     private createCookie(tokenData: TokenData) {
-        return `Authorization=${tokenData.token}; SameSite=Lax; Secure; Max-Age=${tokenData.expiresIn}`;
+        return `Authorization=${tokenData.token}; SameSite=None; Secure; Path=/; Max-Age=${tokenData.expiresIn}`;
     }
 
     private createToken(user: User): TokenData {

@@ -38,7 +38,13 @@ export default class App {
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:
-        this.app.use(cors());
+        this.app.use(
+            cors({
+                origin: "http://localhost:8080",
+                credentials: true,
+                exposedHeaders: ["Cookie", "Authorization"],
+            }),
+        );
         // this.app.use((req, res, next) => {
         //     // res.header("Access-Control-Allow-Origin", "*");
         //     res.header("Access-Control-Allow-Origin", "http://localhost:8080");

@@ -34,12 +34,11 @@ export default class App {
         } catch (error) {
             console.log(error.message);
         }
-
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:
         this.app.use((req, res, next) => {
-            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
             res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
             // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, X-Token, Content-Type, Accept Authorization");
             res.setHeader("Access-Control-Allow-Headers", "*");

@@ -41,8 +41,9 @@ export default class App {
             res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
             res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
             // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested, X-Token, Content-Type, Accept Authorization");
-            res.setHeader("Access-Control-Allow-Headers", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
             res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
             // if (req.method === "OPTIONS") {
             //     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
             //     return res.status(200).json({});

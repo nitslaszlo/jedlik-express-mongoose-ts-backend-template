@@ -23,6 +23,7 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
+        this.router.get(`${this.path}/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
         this.router.post(this.path, [authMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
@@ -32,6 +33,23 @@ export default class PostController implements Controller {
         try {
             // const posts = await this.post.find().populate("author", "-password");
             const posts = await this.post.find();
+            res.send(posts);
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    private getPaginatedPosts = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const offset = parseInt(req.params.offset);
+            const limit = parseInt(req.params.limit);
+            const order = req.params.order;
+            const sort = parseInt(req.params.sort); // desc: -1  asc: 1
+            const posts = await this.post
+                .find()
+                .sort(`${sort == -1 ? "-" : ""}${order}`)
+                .skip(offset)
+                .limit(limit);
             res.send(posts);
         } catch (error) {
             next(new HttpException(400, error.message));

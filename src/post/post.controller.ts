@@ -23,6 +23,7 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
+        this.router.get(`${this.path}/count`, authMiddleware, this.getCountOfPosts);
         this.router.get(`${this.path}/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
@@ -34,6 +35,15 @@ export default class PostController implements Controller {
             // const posts = await this.post.find().populate("author", "-password");
             const posts = await this.post.find();
             res.send(posts);
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    private getCountOfPosts = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const numof = await this.post.find().countDocuments();
+            res.send(numof);
         } catch (error) {
             next(new HttpException(400, error.message));
         }

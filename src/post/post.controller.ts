@@ -42,8 +42,9 @@ export default class PostController implements Controller {
 
     private getCountOfPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const numberOfPosts = await this.post.countDocuments();
-            res.send(numberOfPosts);
+            await this.post.countDocuments({}, function (err, count) {
+                res.send(count);
+            });
         } catch (error) {
             next(new HttpException(400, error.message));
         }

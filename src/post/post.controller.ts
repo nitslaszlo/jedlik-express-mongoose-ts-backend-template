@@ -23,7 +23,7 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
-        this.router.get(`${this.path}/count`, authMiddleware, this.getCountOfPosts);
+        this.router.get(`${this.path}/count/of`, authMiddleware, this.getCountOfPosts);
         this.router.get(`${this.path}/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);

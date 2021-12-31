@@ -32,8 +32,9 @@ export default class PostController implements Controller {
     private getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
             // const posts = await this.post.find().populate("author", "-password");
+            const count = await this.post.countDocuments();
             const posts = await this.post.find();
-            res.send(posts);
+            res.send({ count: count, posts: posts });
         } catch (error) {
             next(new HttpException(400, error.message));
         }
@@ -63,7 +64,7 @@ export default class PostController implements Controller {
                     .skip(offset)
                     .limit(limit);
             }
-            res.send({ count: count, posts: posts});
+            res.send({ count: count, posts: posts });
         } catch (error) {
             next(new HttpException(400, error.message));
         }

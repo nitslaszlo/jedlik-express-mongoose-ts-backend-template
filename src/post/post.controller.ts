@@ -24,7 +24,7 @@ export default class PostController implements Controller {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
         this.router.get(`${this.path}/count/of`, authMiddleware, this.getCountOfPosts);
-        this.router.get(`${this.path}/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
+        this.router.get(`${this.path}/:keyword/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
         this.router.post(this.path, [authMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
@@ -51,8 +51,7 @@ export default class PostController implements Controller {
 
     private getPaginatedPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            // const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
-            const regex = new RegExp("", "i"); // i for case insensitive
+            const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
             const offset = parseInt(req.params.offset);
             const limit = parseInt(req.params.limit);
             const order = req.params.order;

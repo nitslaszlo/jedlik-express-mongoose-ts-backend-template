@@ -62,16 +62,25 @@ export default class PostController implements Controller {
 
     private getPaginatedPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
             const offset = parseInt(req.params.offset);
             const limit = parseInt(req.params.limit);
             const order = req.params.order;
             const sort = parseInt(req.params.sort); // desc: -1  asc: 1
-            const posts = await this.post
-                .find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] })
-                .sort(`${sort == -1 ? "-" : ""}${order}`)
-                .skip(offset)
-                .limit(limit);
+            let posts = [];
+            if (req.params.keyword.length > 0) {
+                const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
+                posts = await this.post
+                    .find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] })
+                    .sort(`${sort == -1 ? "-" : ""}${order}`)
+                    .skip(offset)
+                    .limit(limit);
+            } else {
+                posts = await this.post
+                    .find({})
+                    .sort(`${sort == -1 ? "-" : ""}${order}`)
+                    .skip(offset)
+                    .limit(limit);
+            }
             res.send(posts);
         } catch (error) {
             next(new HttpException(400, error.message));

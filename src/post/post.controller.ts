@@ -24,6 +24,7 @@ export default class PostController implements Controller {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
         this.router.get(`${this.path}/count/of`, authMiddleware, this.getCountOfPosts);
+        this.router.get(`${this.path}/count/of/:keyword`, authMiddleware, this.getCountOfPaginatedPosts);
         this.router.get(`${this.path}/:keyword/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
@@ -44,6 +45,16 @@ export default class PostController implements Controller {
         try {
             const count = await this.post.countDocuments();
             res.send({ countOfPosts: count });
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    private getCountOfPaginatedPosts = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
+            const count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
+            res.send({ countOfPaginatedPosts: count });
         } catch (error) {
             next(new HttpException(400, error.message));
         }

@@ -25,7 +25,7 @@ export default class PostController implements Controller {
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
         this.router.get(`${this.path}/count/of`, authMiddleware, this.getCountOfPosts);
         this.router.get(`${this.path}/count/of/:keyword`, authMiddleware, this.getCountOfFilteredPosts);
-        this.router.get(`${this.path}/:keyword/:offset/:limit/:order/:sort`, authMiddleware, this.getPaginatedPosts);
+        this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
         this.router.post(this.path, [authMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
@@ -68,7 +68,7 @@ export default class PostController implements Controller {
             const sort = parseInt(req.params.sort); // desc: -1  asc: 1
             let posts = [];
             let count = 0;
-            if (req.params.keyword.length > 0) {
+            if (req.params.keyword) {
                 const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
                 count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
                 posts = await this.post

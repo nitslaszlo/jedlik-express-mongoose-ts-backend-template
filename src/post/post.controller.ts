@@ -52,7 +52,7 @@ export default class PostController implements Controller {
     private getPaginatedPosts = async (req: Request, res: Response, next: NextFunction) => {
         try {
             // const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
-            const regex = new RegExp("the", "i"); // i for case insensitive
+            const regex = new RegExp("", "i"); // i for case insensitive
             const offset = parseInt(req.params.offset);
             const limit = parseInt(req.params.limit);
             const order = req.params.order;

@@ -54,7 +54,7 @@ export default class PostController implements Controller {
         try {
             const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
             const count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
-            res.send({ countOfPaginatedPosts: count });
+            res.send({ countOfFilteredPosts: count });
         } catch (error) {
             next(new HttpException(400, error.message));
         }

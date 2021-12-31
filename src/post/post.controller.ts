@@ -23,8 +23,6 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
-        this.router.get(`${this.path}/count/of`, authMiddleware, this.getCountOfPosts);
-        this.router.get(`${this.path}/count/of/:keyword`, authMiddleware, this.getCountOfFilteredPosts);
         this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, authMiddleware, this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
         this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
@@ -36,25 +34,6 @@ export default class PostController implements Controller {
             // const posts = await this.post.find().populate("author", "-password");
             const posts = await this.post.find();
             res.send(posts);
-        } catch (error) {
-            next(new HttpException(400, error.message));
-        }
-    };
-
-    private getCountOfPosts = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const count = await this.post.countDocuments();
-            res.send({ countOfPosts: count });
-        } catch (error) {
-            next(new HttpException(400, error.message));
-        }
-    };
-
-    private getCountOfFilteredPosts = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
-            const count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
-            res.send({ countOfFilteredPosts: count });
         } catch (error) {
             next(new HttpException(400, error.message));
         }
@@ -84,7 +63,7 @@ export default class PostController implements Controller {
                     .skip(offset)
                     .limit(limit);
             }
-            res.send({ posts: posts, count: count });
+            res.send({ count: count, posts: posts});
         } catch (error) {
             next(new HttpException(400, error.message));
         }

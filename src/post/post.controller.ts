@@ -67,21 +67,24 @@ export default class PostController implements Controller {
             const order = req.params.order;
             const sort = parseInt(req.params.sort); // desc: -1  asc: 1
             let posts = [];
+            let count = 0;
             if (req.params.keyword.length > 0) {
                 const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
+                count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
                 posts = await this.post
                     .find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] })
                     .sort(`${sort == -1 ? "-" : ""}${order}`)
                     .skip(offset)
                     .limit(limit);
             } else {
+                count = await this.post.countDocuments();
                 posts = await this.post
                     .find({})
                     .sort(`${sort == -1 ? "-" : ""}${order}`)
                     .skip(offset)
                     .limit(limit);
             }
-            res.send(posts);
+            res.send({ posts: posts, count: count });
         } catch (error) {
             next(new HttpException(400, error.message));
         }

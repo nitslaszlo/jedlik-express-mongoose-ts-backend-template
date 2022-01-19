@@ -4,6 +4,8 @@ This template made on the basis of [Express Typescript tutorial](https://wanago.
 NODE.JS version: v14.17.6
 
 # Links (technologies, software)
+## Heroku link:
+https://jedlik-expr-mongoose-backend.herokuapp.com/
 
 ## Express
 [Express](https://expressjs.com/) is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.

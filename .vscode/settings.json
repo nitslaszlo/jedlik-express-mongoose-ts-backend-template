@@ -38,10 +38,6 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "spellright.language": [
-        "hu"
-    ],
-    "spellright.documentTypes": [
-        "latex"
-    ]
+    "editor.bracketPairColorization.enabled": true,
+    "vscode-edge-devtools.webhint": false
 }

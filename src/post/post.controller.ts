@@ -116,7 +116,9 @@ export default class PostController implements Controller {
             });
             const savedPost = await createdPost.save();
             await savedPost.populate("author", "-password");
-            res.send(savedPost);
+            const count = await this.post.countDocuments();
+            res.send({ count: count, post: savedPost });
+            // res.send(savedPost);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
@@ -128,7 +130,9 @@ export default class PostController implements Controller {
             if (Types.ObjectId.isValid(id)) {
                 const successResponse = await this.post.findByIdAndDelete(id);
                 if (successResponse) {
-                    res.sendStatus(200);
+                    const count = await this.post.countDocuments();
+                    res.send({ count: count, status: 200 });
+                    // res.sendStatus(200);
                 } else {
                     next(new PostNotFoundException(id));
                 }

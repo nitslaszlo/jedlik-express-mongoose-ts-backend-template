@@ -38,6 +38,5 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "editor.bracketPairColorization.enabled": true,
     "vscode-edge-devtools.webhint": false
 }

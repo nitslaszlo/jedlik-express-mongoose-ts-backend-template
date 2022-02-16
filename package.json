@@ -2,9 +2,6 @@
     "name": "jedlik-express-mongoose-ts-backend-template",
     "version": "1.0.0",
     "description": "Jedlik project template for backend programming.",
-    "engines": {
-        "node": "14.x"
-    },
     "main": "src/server.ts",
     "repository": {
         "private": false,
@@ -57,7 +54,7 @@
         "nodemon": "^2.0.15",
         "prettier": "^2.5.1",
         "supertest": "^6.2.2",
-        "ts-jest": "^27.1.1",
+        "ts-jest": "^27.1.3",
         "ts-node": "^10.5.0",
         "typescript": "^4.5.5"
     },

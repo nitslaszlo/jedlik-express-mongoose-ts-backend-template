@@ -1,9 +1,12 @@
 import { Types } from "mongoose";
-export default interface Recipe {
+export default interface IRecipe {
     _id: Types.ObjectId | string;
     author: Types.ObjectId | string;
     recipeName: string;
     imageURL: string;
     description: string;
-    ingredients: string[];
+    dateAdded: Date;
+    isGlutenFree: boolean;
+    prepTime: number;
+    easyOfPrep: number;
 }

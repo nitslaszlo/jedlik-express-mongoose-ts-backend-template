@@ -1,20 +1,23 @@
 import { Schema, model } from "mongoose";
-import Recipe from "./recipe.interface";
+import IRecipe from "./recipe.interface";
 
-const recipeSchema = new Schema<Recipe>(
+const recipeSchema = new Schema<IRecipe>(
     {
         author: {
             ref: "User",
             type: Schema.Types.ObjectId,
-        },
+        }, // idegen kulcs beállítása 1pont
         recipeName: String,
         imageURL: String,
         description: String,
-        ingredients: Array,
+        dateAdded: Date,
+        isGlutenFree: Boolean,
+        prepTime: Number,
+        easyOfPrep: Number,
     },
     { versionKey: false },
 );
 
-const recipeModel = model<Recipe>("Recipes", recipeSchema);
+const recipeModel = model<IRecipe>("Recipes", recipeSchema);
 
 export default recipeModel;

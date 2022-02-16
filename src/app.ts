@@ -1,17 +1,15 @@
-import * as favicon from "serve-favicon";
-import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as mongoose from "mongoose";
 import * as cors from "cors";
-import Controller from "./interfaces/controller.interface";
+import IController from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";
 
 export default class App {
     public app: express.Application;
 
-    constructor(controllers: Controller[]) {
+    constructor(controllers: IController[]) {
         this.app = express();
         this.connectToTheDatabase();
         this.initializeMiddlewares();
@@ -30,11 +28,6 @@ export default class App {
     }
 
     private initializeMiddlewares() {
-        try {
-            this.app.use(favicon(path.join(__dirname, "../favicon.ico")));
-        } catch (error) {
-            console.log(error.message);
-        }
         this.app.use(express.json());
         this.app.use(cookieParser());
         // Enabled CORS:
@@ -52,7 +45,7 @@ export default class App {
         this.app.use(errorMiddleware);
     }
 
-    private initializeControllers(controllers: Controller[]) {
+    private initializeControllers(controllers: IController[]) {
         controllers.forEach(controller => {
             this.app.use("/", controller.router);
         });

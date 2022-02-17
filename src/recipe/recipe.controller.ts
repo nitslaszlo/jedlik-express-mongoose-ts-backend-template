@@ -46,7 +46,7 @@ export default class RecipeController implements Controller {
     private getRecipeById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const recipe = await this.recipeM.findById(id).populate("author", "-password");
+            const recipe = await this.recipeM.findById(id);
             if (recipe) {
                 res.send(recipe);
             } else {
@@ -79,7 +79,6 @@ export default class RecipeController implements Controller {
                 ...recipeData,
             });
             const savedRecipe = await createdRecipe.save();
-            await savedRecipe.populate("author", "-password");
             res.send(savedRecipe);
         } catch (error) {
             next(new HttpException(400, error.message));

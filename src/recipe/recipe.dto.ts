@@ -1,8 +1,14 @@
-import { IsOptional, IsInt, IsBoolean, IsDateString, IsNumber, IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { MinLength, MaxLength, IsOptional, IsInt, IsBoolean, IsDateString, IsNumber, IsNotEmpty, IsString, IsUrl } from "class-validator";
 // class-validator: https://github.com/typestack/class-validator
 export default class RecipeDto {
     @IsNotEmpty()
     @IsString()
+    @MinLength(10, {
+        message: "Name is too short",
+    })
+    @MaxLength(50, {
+        message: "Name is too long",
+    })
     public recipeName: string;
 
     @IsNotEmpty()

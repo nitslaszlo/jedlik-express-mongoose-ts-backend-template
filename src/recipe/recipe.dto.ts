@@ -1,5 +1,5 @@
 import { IsOptional, IsInt, IsBoolean, IsDateString, IsNumber, IsNotEmpty, IsString, IsUrl } from "class-validator";
-
+// class-validator: https://github.com/typestack/class-validator
 export default class RecipeDto {
     @IsNotEmpty()
     @IsString()

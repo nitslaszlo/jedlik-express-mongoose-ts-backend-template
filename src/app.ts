@@ -54,5 +54,6 @@ export default class App {
     private connectToTheDatabase() {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
         mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`);
+        // mongoose.connect(`mongodb://localhost:27017/${MONGO_DB}`);
     }
 }

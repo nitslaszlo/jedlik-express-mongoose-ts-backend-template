@@ -1,5 +1,7 @@
 import { Schema, model } from "mongoose";
 import IRecipe from "./recipe.interface";
+// https://mongoosejs.com/docs/typescript.html
+// https://mongoosejs.com/docs/validation.html
 
 const recipeSchema = new Schema<IRecipe>(
     {

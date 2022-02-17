@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-export default interface User {
+export default interface IUser {
     _id: Types.ObjectId | string;
     name: string;
     email: string;

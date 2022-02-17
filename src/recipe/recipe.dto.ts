@@ -1,33 +1,33 @@
 import { IsOptional, IsInt, IsBoolean, IsDateString, IsNumber, IsNotEmpty, IsString, IsUrl } from "class-validator";
 
-export default class CreateRecipeDto {
+export default class RecipeDto {
     @IsNotEmpty()
     @IsString()
-    public recipeName: string; // 1pont
+    public recipeName: string;
 
     @IsNotEmpty()
     @IsUrl()
     @IsString()
-    public imageURL: string; // 1pont
+    public imageURL: string;
 
     @IsNotEmpty()
     @IsString()
-    public description: string; // 1pont
+    public description: string;
 
     @IsNotEmpty()
     @IsDateString()
     @IsOptional()
-    public dateAdded: Date; // 1pont
+    public dateAdded: Date;
 
     @IsNotEmpty()
     @IsBoolean()
-    public isGlutenFree: boolean; // 1pont
+    public isGlutenFree: boolean;
 
     @IsNotEmpty()
     @IsNumber()
-    public prepTime: number; // 1pont
+    public prepTime: number;
 
     @IsNotEmpty()
     @IsInt()
-    public easyOfPrep: number; // 1pont
+    public easyOfPrep: number;
 }

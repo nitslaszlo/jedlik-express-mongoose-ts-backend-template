@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
-import CreateRecipeDto from "./recipe.dto";
+import RecipeDto from "./recipe.dto";
 import HttpException from "../exceptions/HttpException";
-import Recipe from "./recipe.interface";
+import IRecipe from "./recipe.interface";
 import recipeModel from "./recipe.model";
 import validationMiddleware from "../middleware/validation.middleware";
 
@@ -15,9 +15,9 @@ export default class RecipeController implements Controller {
         this.router.get(this.path, this.getAllRecipes);
         this.router.get(`${this.path}/:id`, this.getRecipeById);
         this.router.get(`${this.path}/:keyword/:orderby/:direction`, this.getRecipes);
-        this.router.patch(`${this.path}/:id`, validationMiddleware(CreateRecipeDto, true), this.modifyRecipe);
+        this.router.patch(`${this.path}/:id`, validationMiddleware(RecipeDto, true), this.modifyRecipe);
         this.router.delete(`${this.path}/:id`, this.deleteRecipes);
-        this.router.post(this.path, validationMiddleware(CreateRecipeDto), this.createRecipe);
+        this.router.post(this.path, validationMiddleware(RecipeDto), this.createRecipe);
     }
 
     private getAllRecipes = async (req: Request, res: Response, next: NextFunction) => {
@@ -37,11 +37,11 @@ export default class RecipeController implements Controller {
             let recipes = [];
             const regex = new RegExp(keyword, "i");
             recipes = await this.recipeM.find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] }).sort(`${direction}${orderby}`); // 1pont 1pont
-            res.send(recipes); // 1pont
+            res.send(recipes);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
-    }; // 1pont
+    };
 
     private getRecipeById = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -60,7 +60,7 @@ export default class RecipeController implements Controller {
     private modifyRecipe = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const recipeData: Recipe = req.body;
+            const recipeData: IRecipe = req.body;
             const recipe = await this.recipeM.findByIdAndUpdate(id, recipeData, { new: true });
             if (recipe) {
                 res.send(recipe);
@@ -74,7 +74,7 @@ export default class RecipeController implements Controller {
 
     private createRecipe = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const recipeData: Recipe = req.body;
+            const recipeData: IRecipe = req.body;
             const createdRecipe = new this.recipeM({
                 ...recipeData,
             });

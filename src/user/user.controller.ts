@@ -4,7 +4,7 @@ import validationMiddleware from "../middleware/validation.middleware";
 import UserDto from "./user.dto";
 import HttpException from "../exceptions/HttpException";
 import userModel from "./user.model";
-import User from "./user.interface";
+import IUser from "./user.interface";
 
 export default class UserController implements Controller {
     public path = "/users";
@@ -21,7 +21,7 @@ export default class UserController implements Controller {
 
     private createUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userData: User = req.body;
+            const userData: IUser = req.body;
             if (await this.user.findOne({ email: userData.email })) {
                 next(new HttpException(400, `User with email ${userData.email} already exists`));
             } else {
@@ -62,7 +62,7 @@ export default class UserController implements Controller {
     private modifyUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const userData: User = req.body;
+            const userData: IUser = req.body;
             const user = await this.user.findByIdAndUpdate(id, userData, { new: true });
             if (user) {
                 res.send(user);

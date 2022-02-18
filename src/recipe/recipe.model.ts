@@ -5,6 +5,10 @@ import IRecipe from "./recipe.interface";
 
 const recipeSchema = new Schema<IRecipe>(
     {
+        author: {
+            ref: "User",
+            type: Schema.Types.ObjectId,
+        },
         recipeName: String,
         imageURL: String,
         description: String,

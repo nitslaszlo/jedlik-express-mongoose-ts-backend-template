@@ -31,11 +31,11 @@ export default class RecipeController implements Controller {
 
     private getRecipes = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const keyword = req.params.keyword;
+            // const keyword = req.params.keyword;
             // const orderby = req.params.orderby;
             // const direction = req.params.direction == "ASC" ? "" : "-"; // ASC or DESC
             let recipes = [];
-            const regex = new RegExp(keyword, "i");
+            // const regex = new RegExp(keyword, "i");
             // recipes = await this.recipeM
             //     .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] })
             //     .sort(`${direction}${orderby}`)
@@ -47,15 +47,15 @@ export default class RecipeController implements Controller {
                         from: "User", // other table name
                         localField: "author", // name of users table field
                         foreignField: "_id", // name of userinfo table field
-                        as: "user_info", // alias for userinfo table
+                        as: "user_recipe", // alias for userinfo table
                     },
                 },
-                { $unwind: "$user_info" },
-                {
-                    $match: {
-                        $or: [{ "$user_info.recipeName": regex }],
-                    },
-                },
+                // { $unwind: "$user_recipe" },
+                // {
+                //     $match: {
+                //         $or: [{ "user_recipe.recipeName": { $regex: regex } }, { "user_recipe.description": { $regex: regex } }],
+                //     },
+                // },
             ]);
             res.send(recipes);
         } catch (error) {

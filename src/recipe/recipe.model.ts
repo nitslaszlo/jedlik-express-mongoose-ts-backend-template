@@ -11,7 +11,11 @@ const recipeSchema = new Schema<IRecipe>(
         dateAdded: Date,
         isGlutenFree: Boolean,
         prepTime: Number,
-        easyOfPrep: Number,
+        easyOfPrep: {
+            type: Number,
+            min: 1,
+            max: 5,
+        },
     },
     { versionKey: false },
 );

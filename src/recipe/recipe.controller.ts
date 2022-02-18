@@ -31,32 +31,36 @@ export default class RecipeController implements Controller {
 
     private getRecipes = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            // const keyword = req.params.keyword;
-            // const orderby = req.params.orderby;
-            // const direction = req.params.direction == "ASC" ? "" : "-"; // ASC or DESC
+            const keyword = req.params.keyword;
+            const orderby = req.params.orderby;
+            const direction = req.params.direction == "ASC" ? "" : "-"; // ASC or DESC
             let recipes = [];
-            // const regex = new RegExp(keyword, "i");
+            const regex = new RegExp(keyword, "i");
+            recipes = await this.recipeM
+                .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] })
+                .sort(`${direction}${orderby}`)
+                .populate("author", "-password -_id"); // 1pont 1pont
+            res.send(recipes);
             // recipes = await this.recipeM
-            //     .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] })
-            //     .sort(`${direction}${orderby}`)
-            //     .populate("author", "-password -_id"); // 1pont 1pont
-            // res.send(recipes);
-            recipes = await this.recipeM.aggregate([
-                {
-                    $lookup: {
-                        from: "User", // other table name
-                        localField: "author", // name of users table field
-                        foreignField: "_id", // name of userinfo table field
-                        as: "user_recipe", // alias for userinfo table
-                    },
-                },
-                // { $unwind: "$user_recipe" },
-                // {
-                //     $match: {
-                //         $or: [{ "user_recipe.recipeName": { $regex: regex } }, { "user_recipe.description": { $regex: regex } }],
-                //     },
-                // },
-            ]);
+            //     .aggregate([
+            //         {
+            //             $lookup: {
+            //                 from: "users",
+            //                 localField: "author",
+            //                 foreignField: "_id",
+            //                 as: "user",
+            //             },
+            //         },
+            //         { $unwind: "$user" },
+            //         {
+            //             $match: {
+            //                 $or: [{ recipeName: { $regex: regex } }, { "user.name": { $regex: regex } }],
+            //             },
+            //         },
+            //         { $sort: { $orderby: 1 } },
+            //         { $project: { _id: 0, description: 0, "user._id": 0, "user.password": 0 } },
+            //     ])
+            //     .sort(`${direction}${orderby}`);
             res.send(recipes);
         } catch (error) {
             next(new HttpException(400, error.message));

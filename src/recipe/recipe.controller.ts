@@ -32,14 +32,31 @@ export default class RecipeController implements Controller {
     private getRecipes = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const keyword = req.params.keyword;
-            const orderby = req.params.orderby;
-            const direction = req.params.direction == "ASC" ? "" : "-"; // ASC or DESC
+            // const orderby = req.params.orderby;
+            // const direction = req.params.direction == "ASC" ? "" : "-"; // ASC or DESC
             let recipes = [];
             const regex = new RegExp(keyword, "i");
-            recipes = await this.recipeM
-                .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }, { name: { $regex: regex } }] })
-                .sort(`${direction}${orderby}`)
-                .populate("author", "-password -_id"); // 1pont 1pont
+            // recipes = await this.recipeM
+            //     .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] })
+            //     .sort(`${direction}${orderby}`)
+            //     .populate("author", "-password -_id"); // 1pont 1pont
+            // res.send(recipes);
+            recipes = await this.recipeM.aggregate([
+                {
+                    $lookup: {
+                        from: "User", // other table name
+                        localField: "author", // name of users table field
+                        foreignField: "_id", // name of userinfo table field
+                        as: "user_info", // alias for userinfo table
+                    },
+                },
+                { $unwind: "$user_info" },
+                {
+                    $match: {
+                        $or: [{ "$user_info.recipeName": regex }],
+                    },
+                },
+            ]);
             res.send(recipes);
         } catch (error) {
             next(new HttpException(400, error.message));

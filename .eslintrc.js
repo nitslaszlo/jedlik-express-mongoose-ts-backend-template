@@ -28,12 +28,4 @@ module.exports = {
         // "@typescript-eslint/no-inferrable-types": "off",
         // "@typescript-eslint/explicit-module-boundary-types": "off",
     },
-    overrides: [
-        {
-            files: ["**/__tests__/*.{j,t}s?(x)", "**/tests/unit/**/*.spec.{j,t}s?(x)"],
-            env: {
-                jest: true,
-            },
-        },
-    ],
 };

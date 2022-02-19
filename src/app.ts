@@ -1,7 +1,6 @@
-import * as cookieParser from "cookie-parser";
+// import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as mongoose from "mongoose";
-import * as cors from "cors";
 import IController from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";
@@ -30,15 +29,7 @@ export default class App {
 
     private initializeMiddlewares() {
         this.app.use(express.json());
-        this.app.use(cookieParser());
-        // Enabled CORS:
-        this.app.use(
-            cors({
-                origin: ["http://localhost:8080"],
-                credentials: true,
-                exposedHeaders: ["set-cookie"],
-            }),
-        );
+        // this.app.use(cookieParser());
         this.app.use(loggerMiddleware);
     }
 
@@ -54,10 +45,10 @@ export default class App {
 
     private connectToTheDatabase() {
         // Connect MongoDB Atlas
-        mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
+        // mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
 
         // Connect to localhost
-        // mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
+        mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
 
         userModel.init();
     }

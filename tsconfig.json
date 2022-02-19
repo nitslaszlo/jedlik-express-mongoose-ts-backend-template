@@ -16,7 +16,6 @@
     "allowSyntheticDefaultImports": true,
     "types": [
       "node",
-      "jest"
     ],
     "rootDir": "./src",
     "typeRoots": [

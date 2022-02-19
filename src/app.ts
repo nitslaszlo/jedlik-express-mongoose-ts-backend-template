@@ -5,6 +5,7 @@ import * as cors from "cors";
 import IController from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";
+import userModel from "./user/user.model";
 
 export default class App {
     public app: express.Application;
@@ -18,8 +19,8 @@ export default class App {
     }
 
     public listen(): void {
-        this.app.listen(process.env.PORT, () => {
-            console.log(`App listening on the port ${process.env.PORT}`);
+        this.app.listen(5000, () => {
+            console.log(`App listening on the port 5000`);
         });
     }
 
@@ -33,7 +34,7 @@ export default class App {
         // Enabled CORS:
         this.app.use(
             cors({
-                origin: ["https://jedlik-vite-template.netlify.app", "https://jedlik-vite-ts-template.netlify.app", "http://localhost:8080"],
+                origin: ["http://localhost:8080"],
                 credentials: true,
                 exposedHeaders: ["set-cookie"],
             }),
@@ -52,8 +53,12 @@ export default class App {
     }
 
     private connectToTheDatabase() {
-        const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
-        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`);
-        // mongoose.connect(`mongodb://localhost:27017/${MONGO_DB}`);
+        // Connect MongoDB Atlas
+        mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
+
+        // Connect to localhost
+        // mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
+
+        userModel.init();
     }
 }

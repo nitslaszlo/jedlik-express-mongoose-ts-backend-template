@@ -12,15 +12,15 @@ export default class RecipeController implements Controller {
     private recipeM = recipeModel;
 
     constructor() {
-        this.router.get(this.path, this.getAllRecipes);
-        this.router.get(`${this.path}/:id`, this.getRecipeById);
-        this.router.get(`${this.path}/:keyword/:orderby/:direction`, this.getRecipes);
-        this.router.patch(`${this.path}/:id`, validationMiddleware(RecipeDto, true), this.modifyRecipe);
-        this.router.delete(`${this.path}/:id`, this.deleteRecipes);
-        this.router.post(this.path, validationMiddleware(RecipeDto), this.createRecipe);
+        this.router.get(this.path, this.getAll);
+        this.router.get(`${this.path}/:id`, this.getById);
+        this.router.get(`${this.path}/:keyword/:orderby/:direction`, this.getDocuments);
+        this.router.patch(`${this.path}/:id`, validationMiddleware(RecipeDto, true), this.modifyDocument);
+        this.router.delete(`${this.path}/:id`, this.deleteDocument);
+        this.router.post(this.path, validationMiddleware(RecipeDto), this.createDocument);
     }
 
-    private getAllRecipes = async (req: Request, res: Response, next: NextFunction) => {
+    private getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const recipes = await this.recipeM.find();
             res.send(recipes);
@@ -29,7 +29,7 @@ export default class RecipeController implements Controller {
         }
     };
 
-    private getRecipes = async (req: Request, res: Response, next: NextFunction) => {
+    private getDocuments = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const keyword = req.params.keyword;
             const orderby = req.params.orderby;
@@ -68,12 +68,12 @@ export default class RecipeController implements Controller {
         }
     };
 
-    private getRecipeById = async (req: Request, res: Response, next: NextFunction) => {
+    private getById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const recipe = await this.recipeM.findById(id);
-            if (recipe) {
-                res.send(recipe);
+            const document = await this.recipeM.findById(id);
+            if (document) {
+                res.send(document);
             } else {
                 next(new HttpException(404, `Recipe with id ${id} not found!`));
             }
@@ -82,13 +82,13 @@ export default class RecipeController implements Controller {
         }
     };
 
-    private modifyRecipe = async (req: Request, res: Response, next: NextFunction) => {
+    private modifyDocument = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const recipeData: IRecipe = req.body;
-            const recipe = await this.recipeM.findByIdAndUpdate(id, recipeData, { new: true });
-            if (recipe) {
-                res.send(recipe);
+            const body: IRecipe = req.body;
+            const updatedDoc = await this.recipeM.findByIdAndUpdate(id, body, { new: true });
+            if (updatedDoc) {
+                res.send(updatedDoc);
             } else {
                 next(new HttpException(404, `Recipe with id ${id} not found!`));
             }
@@ -97,20 +97,20 @@ export default class RecipeController implements Controller {
         }
     };
 
-    private createRecipe = async (req: Request, res: Response, next: NextFunction) => {
+    private createDocument = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const recipeData: IRecipe = req.body;
-            const createdRecipe = new this.recipeM({
-                ...recipeData,
+            const body: IRecipe = req.body;
+            const createdDocument = new this.recipeM({
+                ...body,
             });
-            const savedRecipe = await createdRecipe.save();
-            res.send(savedRecipe);
+            const savedDocument = await createdDocument.save();
+            res.send(savedDocument);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
     };
 
-    private deleteRecipes = async (req: Request, res: Response, next: NextFunction) => {
+    private deleteDocument = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
             const successResponse = await this.recipeM.findByIdAndDelete(id);

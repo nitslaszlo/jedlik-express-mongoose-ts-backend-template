@@ -32,6 +32,6 @@ export default class App {
         // Connect to localhost:
         mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
 
-        userModel.init(); // for pup
+        userModel.init(); // for populate
     }
 }

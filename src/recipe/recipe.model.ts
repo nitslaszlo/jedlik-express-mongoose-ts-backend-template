@@ -5,9 +5,10 @@ import IRecipe from "./recipe.interface";
 
 const recipeSchema = new Schema<IRecipe>(
     {
+        _id: Number,
         author: {
             ref: "User",
-            type: Schema.Types.ObjectId,
+            type: Number,
         },
         recipeName: {
             type: String,

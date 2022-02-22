@@ -1,6 +1,5 @@
-import { Types } from "mongoose";
 export default interface IUser {
-    _id: Types.ObjectId | string;
+    _id: number;
     name: string;
     email: string;
     password: string;

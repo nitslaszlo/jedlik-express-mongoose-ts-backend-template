@@ -2,6 +2,10 @@ import { MinLength, MaxLength, IsOptional, IsInt, IsBoolean, IsDateString, IsNum
 // class-validator: https://github.com/typestack/class-validator
 export default class RecipeDto {
     @IsNotEmpty()
+    @IsInt()
+    public _id: number;
+
+    @IsNotEmpty()
     @IsString()
     @MinLength(10, {
         message: "Name is too short",

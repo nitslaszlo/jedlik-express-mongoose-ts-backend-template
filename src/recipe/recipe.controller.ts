@@ -113,7 +113,7 @@ export default class RecipeController implements Controller {
                 res.send(savedDocument);
             } else {
                 res.status(404);
-                res.send(`Athor with id ${body.author} not found in User collection!`);
+                res.send(`Author with id ${body.author} not found in User collection!`);
             }
         } catch (error) {
             res.status(400);

@@ -13,6 +13,8 @@ const recipeSchema = new Schema(
         recipeName: {
             type: String,
             required: [true, "recepeName field is required"],
+            unique: true,
+            dropDups: true,
         },
         imageURL: {
             type: String,

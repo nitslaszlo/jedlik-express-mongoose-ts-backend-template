@@ -104,8 +104,9 @@ export default class RecipeController implements Controller {
     private createDocument = async (req: Request, res: Response) => {
         try {
             const body = req.body;
-            const user = await this.userM.findById(body.author);
-            if (user) {
+            // Check author is exist in users collection:
+            const author = await this.userM.findById(body.author);
+            if (author) {
                 const createdDocument = new this.recipeM({
                     ...body,
                 });

@@ -1,36 +1,49 @@
 import { Schema, model } from "mongoose";
-import IRecipe from "./recipe.interface";
 // https://mongoosejs.com/docs/typescript.html
 // https://mongoosejs.com/docs/validation.html
 
-const recipeSchema = new Schema<IRecipe>(
+const recipeSchema = new Schema(
     {
         _id: Number,
         author: {
             ref: "User",
             type: Number,
+            required: [true, "author field is required"],
         },
         recipeName: {
             type: String,
-            required: true,
+            required: [true, "recepeName field is required"],
         },
-        imageURL: String,
-        description: String,
+        imageURL: {
+            type: String,
+            required: [true, "imageURL field is required"],
+        },
+        description: {
+            type: String,
+            required: [true, "Description field is required"],
+        },
         dateAdded: {
             type: Date,
             default: new Date(),
         },
-        isGlutenFree: Boolean,
-        prepTime: Number,
+        isGlutenFree: {
+            type: Boolean,
+            required: [true, "isGlutenFree field is required"],
+        },
+        prepTime: {
+            type: Number,
+            required: [true, "prepTime field is required"],
+        },
         easyOfPrep: {
             type: Number,
-            min: [1, "Too few stars"],
-            max: 5,
+            min: [1, "Too few stars, got {VALUE}"],
+            max: [5, "Too many stars, got {VALUE}"],
+            required: [true, "easyOfPrep field is required"],
         },
     },
     { versionKey: false },
 );
 
-const recipeModel = model<IRecipe>("Recipes", recipeSchema);
+const recipeModel = model("Recipes", recipeSchema);
 
 export default recipeModel;

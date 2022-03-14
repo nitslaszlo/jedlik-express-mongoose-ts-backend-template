@@ -1,7 +1,6 @@
 import * as express from "express";
 import * as mongoose from "mongoose";
 import IController from "./interfaces/controller.interface";
-import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";
 import userModel from "./user/user.model";
 
@@ -16,7 +15,6 @@ export default class App {
         controllers.forEach(controller => {
             this.app.use("/", controller.router);
         });
-        this.app.use(errorMiddleware);
     }
 
     public listen(): void {

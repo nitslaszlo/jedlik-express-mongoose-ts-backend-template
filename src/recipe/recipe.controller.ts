@@ -1,35 +1,34 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
-import RecipeDto from "./recipe.dto";
-import HttpException from "../exceptions/HttpException";
-import IRecipe from "./recipe.interface";
 import recipeModel from "./recipe.model";
-import validationMiddleware from "../middleware/validation.middleware";
+import userModel from "../user/user.model";
 
 export default class RecipeController implements Controller {
     public path = "/recipes";
     public router = Router();
     private recipeM = recipeModel;
+    private userM = userModel;
 
     constructor() {
         this.router.get(this.path, this.getAll);
         this.router.get(`${this.path}/:id`, this.getById);
         this.router.get(`${this.path}/:keyword/:orderby/:direction`, this.getDocuments);
-        this.router.patch(`${this.path}/:id`, validationMiddleware(RecipeDto, true), this.modifyDocument);
+        this.router.patch(`${this.path}/:id`, this.modifyDocument);
         this.router.delete(`${this.path}/:id`, this.deleteDocument);
-        this.router.post(this.path, validationMiddleware(RecipeDto), this.createDocument);
+        this.router.post(this.path, this.createDocument);
     }
 
-    private getAll = async (req: Request, res: Response, next: NextFunction) => {
+    private getAll = async (req: Request, res: Response) => {
         try {
-            const recipes = await this.recipeM.find();
+            const recipes = await this.recipeM.find().populate("author", "-password -_id");
             res.send(recipes);
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 
-    private getDocuments = async (req: Request, res: Response, next: NextFunction) => {
+    private getDocuments = async (req: Request, res: Response) => {
         try {
             const keyword = req.params.keyword;
             const orderby = req.params.orderby;
@@ -64,63 +63,77 @@ export default class RecipeController implements Controller {
             //     .sort(`${direction}${orderby}`);
             // res.send(recipes);
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 
-    private getById = async (req: Request, res: Response, next: NextFunction) => {
+    private getById = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const document = await this.recipeM.findById(id);
+            const document = await this.recipeM.findById(id).populate("author", "-password -_id");
             if (document) {
                 res.send(document);
             } else {
-                next(new HttpException(404, `Recipe with id ${id} not found!`));
+                res.status(404);
+                res.send(`Recipe with id ${id} not found!`);
             }
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 
-    private modifyDocument = async (req: Request, res: Response, next: NextFunction) => {
+    private modifyDocument = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const body: IRecipe = req.body;
+            const body = req.body;
             const updatedDoc = await this.recipeM.findByIdAndUpdate(id, body, { new: true });
             if (updatedDoc) {
                 res.send(updatedDoc);
             } else {
-                next(new HttpException(404, `Recipe with id ${id} not found!`));
+                res.status(404);
+                res.send(`Recipe with id ${id} not found!`);
             }
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 
-    private createDocument = async (req: Request, res: Response, next: NextFunction) => {
+    private createDocument = async (req: Request, res: Response) => {
         try {
-            const body: IRecipe = req.body;
-            const createdDocument = new this.recipeM({
-                ...body,
-            });
-            const savedDocument = await createdDocument.save();
-            res.send(savedDocument);
+            const body = req.body;
+            const user = await this.userM.findById(body.author);
+            if (user) {
+                const createdDocument = new this.recipeM({
+                    ...body,
+                });
+                const savedDocument = await createdDocument.save();
+                res.send(savedDocument);
+            } else {
+                res.status(404);
+                res.send(`Athor with id ${body.author} not found in User collection!`);
+            }
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 
-    private deleteDocument = async (req: Request, res: Response, next: NextFunction) => {
+    private deleteDocument = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
             const successResponse = await this.recipeM.findByIdAndDelete(id);
             if (successResponse) {
                 res.sendStatus(200);
             } else {
-                next(new HttpException(404, `Recipe with id ${id} not found!`));
+                res.status(404);
+                res.send(`Recipe with id ${id} not found!`);
             }
         } catch (error) {
-            next(new HttpException(400, error.message));
+            res.status(400);
+            res.send(error.message);
         }
     };
 }

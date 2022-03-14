@@ -20,7 +20,7 @@ const recipeSchema = new Schema(
         },
         description: {
             type: String,
-            required: [true, "Description field is required"],
+            required: [true, "description field is required"],
         },
         dateAdded: {
             type: Date,

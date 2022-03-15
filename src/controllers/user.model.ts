@@ -10,6 +10,6 @@ const userSchema = new Schema(
     { versionKey: false },
 );
 
-const userModel = model("User", userSchema);
+const userModel = model("user", userSchema);
 
 export default userModel;

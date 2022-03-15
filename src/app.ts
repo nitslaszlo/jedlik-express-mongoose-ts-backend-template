@@ -2,7 +2,7 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import IController from "./interfaces/controller.interface";
 import loggerMiddleware from "./middleware/logger.middleware";
-import userModel from "./user/user.model";
+import userModel from "./controllers/user.model";
 
 export default class App {
     public app: express.Application;

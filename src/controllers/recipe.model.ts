@@ -46,6 +46,6 @@ const recipeSchema = new Schema(
     { versionKey: false },
 );
 
-const recipeModel = model("Recipes", recipeSchema);
+const recipeModel = model("recipe", recipeSchema);
 
 export default recipeModel;

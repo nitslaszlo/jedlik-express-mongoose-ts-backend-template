@@ -1,6 +1,6 @@
 import App from "./app";
-import RecipeController from "./recipe/recipe.controller";
+import recipeController from "./controllers/recipe.controller";
 
-const app = new App([new RecipeController()]);
+const app = new App([new recipeController()]);
 
 app.listen();

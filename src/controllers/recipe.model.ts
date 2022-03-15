@@ -6,7 +6,7 @@ const recipeSchema = new Schema(
     {
         _id: Number,
         author: {
-            ref: "User",
+            ref: "user",
             type: Number,
             required: [true, "author field is required"],
         },

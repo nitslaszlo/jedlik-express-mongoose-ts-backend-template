@@ -1,21 +1,33 @@
 import { Request, Response, Router } from "express";
 import Controller from "../interfaces/controller.interface";
 import recipeModel from "./recipe.model";
-import userModel from "./user.model";
 
 export default class recipeController implements Controller {
     public path = "/recipe";
     public router = Router();
     private recipeM = recipeModel;
-    private userM = userModel;
 
     constructor() {
+        this.router.post(this.path, this.create);
         this.router.get(this.path, this.getAll);
         this.router.get(`${this.path}/:id`, this.getById);
-        this.router.patch(`${this.path}/:id`, this.modifyDocument);
-        this.router.delete(`${this.path}/:id`, this.deleteDocument);
-        this.router.post(this.path, this.createDocument);
+        this.router.patch(`${this.path}/:id`, this.modify);
+        this.router.delete(`${this.path}/:id`, this.delete);
     }
+
+    private create = async (req: Request, res: Response) => {
+        try {
+            const body = req.body;
+            const createdDocument = new this.recipeM({
+                ...body,
+            });
+            const savedDocument = await createdDocument.save();
+            res.send(savedDocument);
+        } catch (error) {
+            res.status(400);
+            res.send(error.message);
+        }
+    };
 
     private getAll = async (req: Request, res: Response) => {
         try {
@@ -43,7 +55,7 @@ export default class recipeController implements Controller {
         }
     };
 
-    private modifyDocument = async (req: Request, res: Response) => {
+    private modify = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
             const body = req.body;
@@ -60,21 +72,7 @@ export default class recipeController implements Controller {
         }
     };
 
-    private createDocument = async (req: Request, res: Response) => {
-        try {
-            const body = req.body;
-            const createdDocument = new this.recipeM({
-                ...body,
-            });
-            const savedDocument = await createdDocument.save();
-            res.send(savedDocument);
-        } catch (error) {
-            res.status(400);
-            res.send(error.message);
-        }
-    };
-
-    private deleteDocument = async (req: Request, res: Response) => {
+    private delete = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
             const successResponse = await this.recipeM.findByIdAndDelete(id);

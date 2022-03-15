@@ -2,7 +2,7 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import IController from "./interfaces/controller.interface";
 import loggerMiddleware from "./middleware/logger.middleware";
-import userModel from "./controllers/user.model";
+import authorModel from "./controllers/author.model";
 
 export default class App {
     public app: express.Application;
@@ -24,12 +24,12 @@ export default class App {
     }
 
     private connectToTheDatabase() {
-        // Connect to MongoDB Atlas:
+        // Connect to MongoDB Atlas, create VizsgaBackend database if not exist::
         // mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
 
-        // Connect to localhost:
+        // Connect to localhost:27017, create VizsgaBackend database if not exist:
         mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
 
-        userModel.init(); // for populate
+        authorModel.init(); // for populate
     }
 }

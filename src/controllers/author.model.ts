@@ -15,6 +15,6 @@ const authorSchema = new Schema(
     { versionKey: false },
 );
 
-const authorModel = model("author", authorSchema);
+const authorModel = model("author", authorSchema, "authors");
 
 export default authorModel;

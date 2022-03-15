@@ -31,7 +31,7 @@ export default class recipeController implements Controller {
 
     private getAll = async (req: Request, res: Response) => {
         try {
-            const data = await this.recipeM.find().populate("author", "-password -_id");
+            const data = await this.recipeM.find().populate("author", "-id name");
             res.send(data);
         } catch (error) {
             res.status(400);
@@ -42,7 +42,7 @@ export default class recipeController implements Controller {
     private getById = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const document = await this.recipeM.findById(id).populate("author", "-password -_id");
+            const document = await this.recipeM.findById(id).populate("author", "-_id name");
             if (document) {
                 res.send(document);
             } else {

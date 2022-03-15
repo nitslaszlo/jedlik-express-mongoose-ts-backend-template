@@ -3,11 +3,11 @@ import { Schema, model } from "mongoose";
 const authorSchema = new Schema(
     {
         _id: Number,
-        email: {
+        name: {
             type: String,
             required: true,
         },
-        name: {
+        email: {
             type: String,
             required: true,
         },

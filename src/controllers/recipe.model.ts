@@ -10,7 +10,7 @@ const recipeSchema = new Schema(
             type: Number,
             required: [true, "author field is required"],
         },
-        recipeName: {
+        name: {
             type: String,
             required: [true, "recepeName field is required"],
             unique: true,

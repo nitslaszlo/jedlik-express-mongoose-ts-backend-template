@@ -1,2 +1,2 @@
-"c:\Program Files\MongoDB\Server\5.0\bin\mongoimport.exe" --uri="mongodb://localhost:27017/VizsgaBackend" --collection=kategorias --drop --file=data/kategoriak.json --jsonArray
-"c:\Program Files\MongoDB\Server\5.0\bin\mongoimport.exe" --uri="mongodb://localhost:27017/VizsgaBackend" --collection=ingatlans --drop --file=data/ingatlanok.json --jsonArray
+"c:\Program Files\MongoDB\Server\5.0\bin\mongoimport.exe" --uri="mongodb://localhost:27017/VizsgaBackend" --collection=kategorias --drop --file=kategoriak.json --jsonArray
+"c:\Program Files\MongoDB\Server\5.0\bin\mongoimport.exe" --uri="mongodb://localhost:27017/VizsgaBackend" --collection=ingatlans --drop --file=ingatlanok.json --jsonArray

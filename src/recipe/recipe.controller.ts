@@ -22,7 +22,7 @@ export default class RecipeController implements Controller {
 
     private getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const recipes = await this.recipeM.find();
+            const recipes = await this.recipeM.find().populate("author", "-password -_id");
             res.send(recipes);
         } catch (error) {
             next(new HttpException(400, error.message));

@@ -27,10 +27,10 @@ export default class App {
 
     private connectToTheDatabase() {
         // Connect to MongoDB Atlas:
-        // mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
+        mongoose.connect("mongodb+srv://m001-student:m001-student@sandbox.3fiqf.mongodb.net/VizsgaBackend?retryWrites=true&w=majority");
 
         // Connect to localhost:
-        mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
+        // mongoose.connect(`mongodb://localhost:27017/VizsgaBackend`);
 
         userModel.init(); // for populate
     }

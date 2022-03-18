@@ -18,7 +18,7 @@ const recipeSchema = new Schema<IRecipe>(
         description: String,
         dateAdded: {
             type: Date,
-            default: Date.now,
+            default: new Date(),
         },
         isGlutenFree: Boolean,
         prepTime: Number,

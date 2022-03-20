@@ -1,3 +1,5 @@
+// https://mongoosejs.com/docs/validation.html
+
 import { Schema, model } from "mongoose";
 import Recipe from "./recipe.interface";
 

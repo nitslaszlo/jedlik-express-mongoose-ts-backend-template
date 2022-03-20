@@ -60,6 +60,18 @@ export default class App {
 
     private connectToTheDatabase() {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
-        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`);
+        // Connect to MongoDB Atlas, create database if not exist::
+        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`, err => {
+            if (err) {
+                console.log("Unable to connect to the server. Please start MongoDB.");
+            }
+        });
+
+        mongoose.connection.on("error", error => {
+            console.log(`Mongoose error message: ${error.message}`);
+        });
+        mongoose.connection.on("connected", () => {
+            console.log("Connected to MongoDB server.");
+        });
     }
 }

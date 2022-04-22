@@ -31,7 +31,7 @@
         "envalid": "^7.3.1",
         "express": "^4.17.3",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "6.3.0",
+        "mongoose": "6.3.1",
         "serve-favicon": "^2.5.0"
     },
     "devDependencies": {
@@ -45,8 +45,8 @@
         "@types/serve-favicon": "^2.5.3",
         "@types/supertest": "^2.0.12",
         "@types/validator": "^13.7.2",
-        "@typescript-eslint/eslint-plugin": "^5.19.0",
-        "@typescript-eslint/parser": "^5.19.0",
+        "@typescript-eslint/eslint-plugin": "^5.20.0",
+        "@typescript-eslint/parser": "^5.20.0",
         "eslint": "^8.13.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.0.0",

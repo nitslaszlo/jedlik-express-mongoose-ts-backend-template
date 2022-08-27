@@ -40,7 +40,7 @@ export default class App {
         // Enabled CORS:
         this.app.use(
             cors({
-                origin: ["https://jedlik-vite-template.netlify.app", "https://jedlik-vite-ts-template.netlify.app", "http://localhost:8080"],
+                origin: ["https://jedlik-vite-quasar-template.netlify.app", "https://jedlik-vite-ts-template.netlify.app", "http://localhost:8080", "http://127.0.0.1:8080"],
                 credentials: true,
                 exposedHeaders: ["set-cookie"],
             }),

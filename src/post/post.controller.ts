@@ -48,7 +48,7 @@ export default class PostController implements Controller {
             const sort = parseInt(req.params.sort); // desc: -1  asc: 1
             let posts = [];
             let count = 0;
-            if (req.params.keyword) {
+            if (req.params.keyword && req.params.keyword != "") {
                 const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
                 count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
                 posts = await this.post
@@ -130,9 +130,9 @@ export default class PostController implements Controller {
             if (Types.ObjectId.isValid(id)) {
                 const successResponse = await this.post.findByIdAndDelete(id);
                 if (successResponse) {
-                    const count = await this.post.countDocuments();
-                    res.send({ count: count, status: 200 });
-                    // res.sendStatus(200);
+                    // const count = await this.post.countDocuments();
+                    // res.send({ count: count, status: 200 });
+                    res.sendStatus(200);
                 } else {
                     next(new PostNotFoundException(id));
                 }

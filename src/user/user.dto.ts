@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IsOptional, IsString, ValidateNested } from "class-validator";
 import CreateAddressDto from "./address.dto";
 

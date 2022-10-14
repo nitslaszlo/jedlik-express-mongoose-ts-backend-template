@@ -13,37 +13,22 @@ import userModel from "./../user/user.model";
 import CreateUserDto from "../user/user.dto";
 import LogInDto from "./logIn.dto";
 import { OAuth2Client } from "google-auth-library";
+import IGoogleUserInfo from "interfaces/googleUserInfo.interface";
 
 export default class AuthenticationController implements Controller {
     public path = "/auth";
     public router = Router();
     private user = userModel;
 
-    client: OAuth2Client;
-
-    private verifyCode = async (code: string) => {
-        const { tokens } = await this.client.getToken(code);
-        this.client.setCredentials({ access_token: tokens.access_token });
-        const userinfo = await this.client.request({
-            url: "https://www.googleapis.com/oauth2/v3/userinfo",
-        });
-        return userinfo.data;
-    };
-
     constructor() {
         this.initializeRoutes();
-        this.client = new OAuth2Client({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            redirectUri: process.env.GOOGLE_REDIRECT_URI,
-        });
     }
 
     private initializeRoutes() {
         this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
         this.router.post(`${this.path}/login`, validationMiddleware(LogInDto), this.loggingIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
-        this.router.post(`${this.path}/google`, this.loginGoogle);
+        this.router.post(`${this.path}/google`, this.loginAndRegisterWithGoogle);
     }
 
     private registration = async (req: Request, res: Response, next: NextFunction) => {
@@ -95,20 +80,42 @@ export default class AuthenticationController implements Controller {
         res.sendStatus(200);
     };
 
-    private loginGoogle = async (req: Request, res: Response, next: NextFunction) => {
+    private loginAndRegisterWithGoogle = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.body.code);
-            this.verifyCode(req.body.code)
+            const client: OAuth2Client = new OAuth2Client();
+            const verifyToken = async (token: string) => {
+                client.setCredentials({ access_token: token });
+                const userinfo = await client.request({
+                    url: "https://www.googleapis.com/oauth2/v3/userinfo",
+                });
+                return userinfo.data;
+            };
+
+            verifyToken(req.body.atoken)
                 .then(userInfo => {
-                    // use userInfo and do your server-side logics here
-                    res.send(userInfo);
-                    console.log("ok !!!!!!");
-                    console.log(userInfo);
+                    const googleUser = userInfo as IGoogleUserInfo;
+                    this.user.findOne({ email: googleUser.email }).then(user => {
+                        if (user) {
+                            const tokenData = this.createToken(user);
+                            res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
+                            res.send(user);
+                        } else {
+                            // Register as new Google user
+                            this.user
+                                .create({
+                                    ...googleUser,
+                                    password: "stored at Google",
+                                })
+                                .then(user => {
+                                    const tokenData: TokenData = this.createToken(user);
+                                    res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
+                                    res.send(user);
+                                });
+                        }
+                    });
                 })
-                .catch(error => {
-                    // validation failed and userinfo was not obtained
-                    console.log("wrong");
-                    res.send(error);
+                .catch(() => {
+                    next(new WrongCredentialsException());
                 });
         } catch (error) {
             next(new HttpException(400, error.message));

@@ -12,11 +12,28 @@ import User from "../user/user.interface";
 import userModel from "./../user/user.model";
 import CreateUserDto from "../user/user.dto";
 import LogInDto from "./logIn.dto";
+import { OAuth2Client } from "google-auth-library";
 
 export default class AuthenticationController implements Controller {
     public path = "/auth";
     public router = Router();
     private user = userModel;
+
+    client: OAuth2Client = new OAuth2Client({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectUri: process.env.GOOGLE_REDIRECT_URI,
+    });
+
+    private verifyCode = async (code: string) => {
+        console.log(this.client);
+        const { tokens } = await this.client.getToken(code);
+        this.client.setCredentials({ access_token: tokens.access_token });
+        const userinfo = await this.client.request({
+            url: "https://www.googleapis.com/oauth2/v3/userinfo",
+        });
+        return userinfo.data;
+    };
 
     constructor() {
         this.initializeRoutes();
@@ -26,6 +43,7 @@ export default class AuthenticationController implements Controller {
         this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
         this.router.post(`${this.path}/login`, validationMiddleware(LogInDto), this.loggingIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
+        this.router.post(`${this.path}/google`, this.loginGoogle);
     }
 
     private registration = async (req: Request, res: Response, next: NextFunction) => {
@@ -75,6 +93,26 @@ export default class AuthenticationController implements Controller {
     private loggingOut = (req: Request, res: Response) => {
         res.setHeader("Set-Cookie", ["Authorization=; SameSite=None; Secure; Path=/; Max-age=0"]);
         res.sendStatus(200);
+    };
+
+    private loginGoogle = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            console.log(req.body.code);
+            this.verifyCode(req.body.code)
+                .then(userInfo => {
+                    // use userInfo and do your server-side logics here
+                    res.send(userInfo);
+                    console.log("ok !!!!!!");
+                    console.log(userInfo);
+                })
+                .catch(error => {
+                    // validation failed and userinfo was not obtained
+                    console.log("wrong");
+                    res.send(error);
+                });
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
     };
 
     private createCookie(tokenData: TokenData) {

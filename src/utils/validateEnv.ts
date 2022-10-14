@@ -8,5 +8,7 @@ export default function validateEnv(): void {
         MONGO_USER: str(),
         MONGO_DB: str(),
         PORT: port(),
+        GOOGLE_CLIENT_ID: str(),
+        GOOGLE_CLIENT_SECRET: str(),
     });
 }

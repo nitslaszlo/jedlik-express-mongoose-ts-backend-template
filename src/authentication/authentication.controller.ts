@@ -26,7 +26,6 @@ export default class AuthenticationController implements Controller {
     });
 
     private verifyCode = async (code: string) => {
-        console.log(this.client);
         const { tokens } = await this.client.getToken(code);
         this.client.setCredentials({ access_token: tokens.access_token });
         const userinfo = await this.client.request({

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "target": "esnext",
-    "module": "commonjs",
+    "module": "CommonJS",
     "outDir": "./dist",
     "baseUrl": "./src",
     "alwaysStrict": true,

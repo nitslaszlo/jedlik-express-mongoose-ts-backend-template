@@ -19,11 +19,7 @@ export default class AuthenticationController implements Controller {
     public router = Router();
     private user = userModel;
 
-    client: OAuth2Client = new OAuth2Client({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        redirectUri: process.env.GOOGLE_REDIRECT_URI,
-    });
+    client: OAuth2Client;
 
     private verifyCode = async (code: string) => {
         const { tokens } = await this.client.getToken(code);
@@ -36,6 +32,11 @@ export default class AuthenticationController implements Controller {
 
     constructor() {
         this.initializeRoutes();
+        this.client = new OAuth2Client({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            redirectUri: process.env.GOOGLE_REDIRECT_URI,
+        });
     }
 
     private initializeRoutes() {

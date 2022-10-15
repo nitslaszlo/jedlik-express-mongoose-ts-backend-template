@@ -14,7 +14,9 @@ const userSchema = new Schema<User>(
     {
         address: addressSchema,
         email: String,
+        email_verified: Boolean,
         name: String,
+        picture: String,
         password: String,
     },
     { versionKey: false },

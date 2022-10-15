@@ -3,6 +3,8 @@ export default interface User {
     _id: Types.ObjectId | string;
     name: string;
     email: string;
+    email_verified: boolean;
+    picture: string;
     password: string;
     address?: {
         street: string;

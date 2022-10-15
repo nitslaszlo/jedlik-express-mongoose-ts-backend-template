@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IsOptional, IsString, ValidateNested } from "class-validator";
+import { IsOptional, IsString, IsBoolean, ValidateNested } from "class-validator";
 import CreateAddressDto from "./address.dto";
 
 export default class CreateUserDto {
@@ -8,6 +8,12 @@ export default class CreateUserDto {
 
     @IsString()
     public email: string;
+
+    @IsBoolean()
+    public email_verifed: boolean;
+
+    @IsString()
+    public picture: string;
 
     @IsString()
     public password: string;

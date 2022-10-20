@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IsOptional, IsString, IsBoolean, ValidateNested } from "class-validator";
+import { IsOptional, IsString, IsBoolean, ValidateNested, IsInt } from "class-validator";
 import CreateAddressDto from "./address.dto";
 
 export default class CreateUserDto {
@@ -17,6 +17,9 @@ export default class CreateUserDto {
 
     @IsString()
     public password: string;
+
+    @IsInt()
+    public role_bits: number;
 
     @IsOptional()
     @ValidateNested()

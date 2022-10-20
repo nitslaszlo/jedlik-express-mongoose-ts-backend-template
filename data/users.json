@@ -15,7 +15,8 @@
         "email_verified": true,
         "name": "student005",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
-        "password": "$2b$10$HBH36EkxhwwOcI7UM/Km3uHUcgwPJjleZYS9fqOgjIr.qmvTUlGPu"
+        "password": "$2b$10$HBH36EkxhwwOcI7UM/Km3uHUcgwPJjleZYS9fqOgjIr.qmvTUlGPu",
+        "role_bits": 0
     },
     {
         "_id": {
@@ -33,7 +34,8 @@
         "email_verified": true,
         "name": "student003",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
-        "password": "$2b$10$WTvhxEncr.YdgIquNpob8OpWqf5hNWEynKNFyQukvmtM/DzRt9ulW"
+        "password": "$2b$10$WTvhxEncr.YdgIquNpob8OpWqf5hNWEynKNFyQukvmtM/DzRt9ulW",
+        "role_bits": 0
     },
     {
         "_id": {
@@ -51,7 +53,8 @@
         "email_verified": true,
         "name": "student002",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
-        "password": "$2b$10$Rp5avm47rbRHxJxy8sEVueBTLYFAyrVIFiAebUAJDMKlM5raFnwpi"
+        "password": "$2b$10$Rp5avm47rbRHxJxy8sEVueBTLYFAyrVIFiAebUAJDMKlM5raFnwpi",
+        "role_bits": 0
     },
     {
         "_id": {
@@ -69,7 +72,8 @@
         "email_verified": true,
         "name": "student001",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
-        "password": "$2b$10$9Czj8XCCZ6Wg5h9HSngl2eMqAO0Pk/LFmf.LrfeLKDXsBQaI07Pv."
+        "password": "$2b$10$9Czj8XCCZ6Wg5h9HSngl2eMqAO0Pk/LFmf.LrfeLKDXsBQaI07Pv.",
+        "role_bits": 0
     },
     {
         "_id": {
@@ -87,6 +91,7 @@
         "email_verified": true,
         "name": "student004",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
-        "password": "$2b$10$saCo0rqdGbIiacjcZ60CGuGw8QhA8tgh3gfn0w.LFaVlyPJzd9zA6"
+        "password": "$2b$10$saCo0rqdGbIiacjcZ60CGuGw8QhA8tgh3gfn0w.LFaVlyPJzd9zA6",
+        "role_bits": 0
     }
 ]

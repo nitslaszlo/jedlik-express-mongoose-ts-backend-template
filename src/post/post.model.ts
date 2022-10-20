@@ -8,7 +8,6 @@ const postSchema = new Schema<Post>(
             type: Schema.Types.ObjectId,
         },
         content: String,
-        title: String,
     },
     { versionKey: false },
 );

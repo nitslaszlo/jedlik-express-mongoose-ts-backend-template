@@ -4,7 +4,7 @@ export default interface IGoogleUserInfo {
     given_name: string;
     family_name: string;
     picture: string;
-    email: StreamPipeOptions;
+    email: string;
     email_verified: boolean;
     locale: string;
     hd: string;

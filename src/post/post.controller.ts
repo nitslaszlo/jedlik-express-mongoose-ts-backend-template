@@ -6,6 +6,7 @@ import HttpException from "../exceptions/HttpException";
 import Controller from "../interfaces/controller.interface";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
+import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import CreatePostDto from "./post.dto";
 import Post from "./post.interface";
@@ -23,10 +24,10 @@ export default class PostController implements Controller {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllPosts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPostById);
-        this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, authMiddleware, this.getPaginatedPosts);
+        this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, [authMiddleware, roleCheckMiddleware(0b0100 << 4)], this.getPaginatedPosts);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePostDto, true)], this.modifyPost);
-        this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
-        this.router.post(this.path, [authMiddleware, validationMiddleware(CreatePostDto)], this.createPost);
+        this.router.delete(`${this.path}/:id`, roleCheckMiddleware(0b0001 << 4), this.deletePost);
+        this.router.post(this.path, [roleCheckMiddleware(0b1000 << 4), validationMiddleware(CreatePostDto)], this.createPost);
     }
 
     private getAllPosts = async (req: Request, res: Response, next: NextFunction) => {

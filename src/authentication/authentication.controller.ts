@@ -14,6 +14,7 @@ import CreateUserDto from "../user/user.dto";
 import LogInDto from "./logIn.dto";
 import { OAuth2Client } from "google-auth-library";
 import IGoogleUserInfo from "interfaces/googleUserInfo.interface";
+import RequestWithUser from "interfaces/requestWithUser.interface";
 
 export default class AuthenticationController implements Controller {
     public path = "/auth";
@@ -27,6 +28,7 @@ export default class AuthenticationController implements Controller {
     private initializeRoutes() {
         this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
         this.router.post(`${this.path}/login`, validationMiddleware(LogInDto), this.loggingIn);
+        this.router.post(`${this.path}/silentlogin`, this.silentLogin);
         this.router.post(`${this.path}/logout`, this.loggingOut);
         this.router.post(`${this.path}/google`, this.loginAndRegisterWithGoogle);
     }
@@ -50,6 +52,25 @@ export default class AuthenticationController implements Controller {
             }
         } catch (error) {
             next(new HttpException(400, error.message));
+        }
+    };
+
+    private silentLogin = async (req: RequestWithUser, res: Response) => {
+        const cookies = req.cookies;
+        if (cookies && cookies.Authorization) {
+            const secret = process.env.JWT_SECRET;
+            const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
+            if (verificationResponse && verificationResponse._id) {
+                const id = verificationResponse._id;
+                const user = await userModel.findById(id);
+                if (user) {
+                    res.send(user);
+                }
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            res.sendStatus(404);
         }
     };
 
@@ -105,6 +126,7 @@ export default class AuthenticationController implements Controller {
                                 .create({
                                     ...googleUser,
                                     password: "stored at Google",
+                                    role_bits: 0,
                                 })
                                 .then(user => {
                                     const tokenData: TokenData = this.createToken(user);
@@ -128,6 +150,7 @@ export default class AuthenticationController implements Controller {
 
     private createToken(user: User): TokenData {
         const expiresIn = 24 * 60 * 60; // 1 day
+        // const expiresIn = 30; // for test
         const secret = process.env.JWT_SECRET;
         const dataStoredInToken: DataStoredInToken = {
             _id: user._id.toString(),

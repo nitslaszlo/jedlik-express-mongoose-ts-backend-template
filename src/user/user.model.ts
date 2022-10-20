@@ -13,11 +13,30 @@ const addressSchema = new Schema(
 const userSchema = new Schema<User>(
     {
         address: addressSchema,
-        email: String,
-        email_verified: Boolean,
-        name: String,
-        picture: String,
-        password: String,
+        email: {
+            type: String,
+            required: true,
+        },
+        email_verified: {
+            type: Boolean,
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        picture: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        role_bits: {
+            type: Number,
+            required: true,
+        },
     },
     { versionKey: false },
 );

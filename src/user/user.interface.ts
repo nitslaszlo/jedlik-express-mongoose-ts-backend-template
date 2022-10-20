@@ -6,6 +6,7 @@ export default interface User {
     email_verified: boolean;
     picture: string;
     password: string;
+    role_bits: number;
     address?: {
         street: string;
         city: string;

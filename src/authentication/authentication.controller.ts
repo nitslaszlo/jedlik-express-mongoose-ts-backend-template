@@ -97,7 +97,7 @@ export default class AuthenticationController implements Controller {
     };
 
     private loggingOut = (req: Request, res: Response) => {
-        res.setHeader("Set-Cookie", ["Authorization=; SameSite=None; Secure; Path=/; Max-age=0"]);
+        res.setHeader("Set-Cookie", ["Authorization=; SameSite=None; HttpOnly; Secure; Path=/; Max-age=0"]);
         res.sendStatus(200);
     };
 
@@ -145,7 +145,7 @@ export default class AuthenticationController implements Controller {
     };
 
     private createCookie(tokenData: TokenData) {
-        return `Authorization=${tokenData.token}; SameSite=None; Secure; Path=/; Max-Age=${tokenData.expiresIn}`;
+        return `Authorization=${tokenData.token}; SameSite=None; HttpOnly; Secure;  Path=/; Max-Age=${tokenData.expiresIn}`;
     }
 
     private createToken(user: User): TokenData {

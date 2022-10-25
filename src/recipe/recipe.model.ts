@@ -1,9 +1,9 @@
 // https://mongoosejs.com/docs/validation.html
 
 import { Schema, model } from "mongoose";
-import Recipe from "./recipe.interface";
+import IRecipe from "./recipe.interface";
 
-const recipeSchema = new Schema<Recipe>(
+const recipeSchema = new Schema<IRecipe>(
     {
         author: {
             ref: "User",
@@ -17,6 +17,6 @@ const recipeSchema = new Schema<Recipe>(
     { versionKey: false },
 );
 
-const recipeModel = model<Recipe>("Recipes", recipeSchema);
+const recipeModel = model<IRecipe>("Recipes", recipeSchema);
 
 export default recipeModel;

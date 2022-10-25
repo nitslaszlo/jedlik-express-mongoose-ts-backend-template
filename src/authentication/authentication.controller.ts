@@ -8,7 +8,7 @@ import Controller from "../interfaces/controller.interface";
 import DataStoredInToken from "../interfaces/dataStoredInToken";
 import TokenData from "../interfaces/tokenData.interface";
 import validationMiddleware from "../middleware/validation.middleware";
-import User from "../user/user.interface";
+import IUser from "../user/user.interface";
 import userModel from "./../user/user.model";
 import CreateUserDto from "../user/user.dto";
 import LogInDto from "./logIn.dto";
@@ -35,7 +35,7 @@ export default class AuthenticationController implements Controller {
 
     private registration = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userData: User = req.body;
+            const userData: IUser = req.body;
             if (await this.user.findOne({ email: userData.email })) {
                 next(new UserWithThatEmailAlreadyExistsException(userData.email));
             } else {
@@ -76,7 +76,7 @@ export default class AuthenticationController implements Controller {
 
     private loggingIn = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const logInData: User = req.body;
+            const logInData: IUser = req.body;
             const user = await this.user.findOne({ email: logInData.email });
             if (user) {
                 const isPasswordMatching = await bcrypt.compare(logInData.password, user.password);
@@ -148,7 +148,7 @@ export default class AuthenticationController implements Controller {
         return `Authorization=${tokenData.token}; SameSite=None; HttpOnly; Secure;  Path=/; Max-Age=${tokenData.expiresIn}`;
     }
 
-    private createToken(user: User): TokenData {
+    private createToken(user: IUser): TokenData {
         const expiresIn = 24 * 60 * 60; // 1 day
         // const expiresIn = 30; // for test
         const secret = process.env.JWT_SECRET;

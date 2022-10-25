@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import User from "./user.interface";
+import IUser from "./user.interface";
 
 const addressSchema = new Schema(
     {
@@ -10,10 +10,14 @@ const addressSchema = new Schema(
     { versionKey: false },
 );
 
-const userSchema = new Schema<User>(
+const userSchema = new Schema<IUser>(
     {
         address: addressSchema,
         email: {
+            type: String,
+            required: true,
+        },
+        email_address_confirm: {
             type: String,
             required: true,
         },
@@ -41,6 +45,6 @@ const userSchema = new Schema<User>(
     { versionKey: false },
 );
 
-const userModel = model<User>("User", userSchema);
+const userModel = model<IUser>("User", userSchema);
 
 export default userModel;

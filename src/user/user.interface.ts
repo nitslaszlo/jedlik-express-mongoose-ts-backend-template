@@ -1,8 +1,9 @@
 import { Types } from "mongoose";
-export default interface User {
+export default interface IUser {
     _id: Types.ObjectId | string;
     name: string;
     email: string;
+    email_address_confirm: string;
     email_verified: boolean;
     picture: string;
     password: string;

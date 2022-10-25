@@ -10,7 +10,7 @@ import IdNotValidException from "../exceptions/IdNotValidException";
 import HttpException from "../exceptions/HttpException";
 import userModel from "./user.model";
 import postModel from "../post/post.model";
-import User from "./user.interface";
+import IUser from "./user.interface";
 
 export default class UserController implements Controller {
     public path = "/users";
@@ -69,7 +69,7 @@ export default class UserController implements Controller {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
-                const userData: User = req.body;
+                const userData: IUser = req.body;
                 const user = await this.user.findByIdAndUpdate(id, userData, { new: true });
                 if (user) {
                     res.send(user);

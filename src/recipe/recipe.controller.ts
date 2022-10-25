@@ -4,7 +4,7 @@ import Controller from "../interfaces/controller.interface";
 import CreateRecipeDto from "./recipe.dto";
 import HttpException from "../exceptions/HttpException";
 import IdNotValidException from "../exceptions/IdNotValidException";
-import Recipe from "./recipe.interface";
+import IRecipe from "./recipe.interface";
 import RecipeNotFoundException from "../exceptions/RecipeNotFoundException";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import { Types } from "mongoose";
@@ -92,7 +92,7 @@ export default class RecipeController implements Controller {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
-                const recipeData: Recipe = req.body;
+                const recipeData: IRecipe = req.body;
                 const recipe = await this.recipeM.findByIdAndUpdate(id, recipeData, { new: true });
                 if (recipe) {
                     res.send(recipe);
@@ -109,7 +109,7 @@ export default class RecipeController implements Controller {
 
     private createRecipe = async (req: RequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const recipeData: Recipe = req.body;
+            const recipeData: IRecipe = req.body;
             const createdRecipe = new this.recipeM({
                 ...recipeData,
                 author: req.user._id,

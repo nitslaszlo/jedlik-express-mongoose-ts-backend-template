@@ -12,6 +12,7 @@
             }
         },
         "email": "student005@jedlik.eu",
+        "email_address_confirm": "student005@jedlik.eu",
         "email_verified": true,
         "name": "student005",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
@@ -31,6 +32,7 @@
             }
         },
         "email": "student003@jedlik.eu",
+        "email_address_confirm": "student003@jedlik.eu",
         "email_verified": true,
         "name": "student003",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
@@ -50,6 +52,7 @@
             }
         },
         "email": "student002@jedlik.eu",
+        "email_address_confirm": "student002@jedlik.eu",
         "email_verified": true,
         "name": "student002",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
@@ -69,6 +72,7 @@
             }
         },
         "email": "student001@jedlik.eu",
+        "email_address_confirm": "student001@jedlik.eu",
         "email_verified": true,
         "name": "student001",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
@@ -88,6 +92,7 @@
             }
         },
         "email": "student004@jedlik.eu",
+        "email_address_confirm": "student004@jedlik.eu",
         "email_verified": true,
         "name": "student004",
         "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",

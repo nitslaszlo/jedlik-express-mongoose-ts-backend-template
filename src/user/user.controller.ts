@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
-import Controller from "../interfaces/controller.interface";
-import RequestWithUser from "../interfaces/requestWithUser.interface";
+import IController from "../interfaces/controller.interface";
+import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import CreateUserDto from "./user.dto";
@@ -12,7 +12,7 @@ import userModel from "./user.model";
 import postModel from "../post/post.model";
 import IUser from "./user.interface";
 
-export default class UserController implements Controller {
+export default class UserController implements IController {
     public path = "/users";
     public router = Router();
     private user = userModel;
@@ -102,7 +102,7 @@ export default class UserController implements Controller {
         }
     };
 
-    private getAllPostsOfLoggedUser = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    private getAllPostsOfLoggedUser = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         try {
             const id = req.user._id; // Stored user's ID in Cookie
             const posts = await this.post.find({ author: id });

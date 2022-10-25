@@ -1,9 +1,9 @@
 import { Router, Request, Response, NextFunction } from "express";
-import Controller from "../interfaces/controller.interface";
+import IController from "../interfaces/controller.interface";
 import userModel from "../user/user.model";
 import HttpException from "../exceptions/HttpException";
 
-export default class ReportController implements Controller {
+export default class ReportController implements IController {
     public path = "/report";
     public router = Router();
     private user = userModel;

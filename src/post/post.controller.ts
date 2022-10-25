@@ -3,16 +3,16 @@ import { Types } from "mongoose";
 import PostNotFoundException from "../exceptions/PostNotFoundException";
 import IdNotValidException from "../exceptions/IdNotValidException";
 import HttpException from "../exceptions/HttpException";
-import Controller from "../interfaces/controller.interface";
-import RequestWithUser from "../interfaces/requestWithUser.interface";
+import IController from "../interfaces/controller.interface";
+import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
 import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import CreatePostDto from "./post.dto";
-import Post from "./post.interface";
+import IPost from "./post.interface";
 import postModel from "./post.model";
 
-export default class PostController implements Controller {
+export default class PostController implements IController {
     public path = "/posts";
     public router = Router();
     private post = postModel;
@@ -93,7 +93,7 @@ export default class PostController implements Controller {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
-                const postData: Post = req.body;
+                const postData: IPost = req.body;
                 const post = await this.post.findByIdAndUpdate(id, postData, { new: true });
                 if (post) {
                     res.send(post);
@@ -108,9 +108,9 @@ export default class PostController implements Controller {
         }
     };
 
-    private createPost = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    private createPost = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const postData: Post = req.body;
+            const postData: IPost = req.body;
             const createdPost = new this.post({
                 ...postData,
                 author: req.user._id,

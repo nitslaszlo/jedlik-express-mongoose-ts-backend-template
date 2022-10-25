@@ -1,10 +1,10 @@
 import { NextFunction, Response } from "express";
 import * as express from "express";
-import RequestWithUser from "../interfaces/requestWithUser.interface";
+import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import InsufficientRoleException from "../exceptions/InsufficientRoleException";
 
 export default function roleCheckMiddleware(req_role_bits = 0): express.RequestHandler {
-    return (req: RequestWithUser, res: Response, next: NextFunction) => {
+    return (req: IRequestWithUser, res: Response, next: NextFunction) => {
         if ((req.user.role_bits & req_role_bits) == req_role_bits) {
             next();
         } else {

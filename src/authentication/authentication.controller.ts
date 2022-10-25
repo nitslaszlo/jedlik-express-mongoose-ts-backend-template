@@ -4,9 +4,9 @@ import * as jwt from "jsonwebtoken";
 import UserWithThatEmailAlreadyExistsException from "../exceptions/UserWithThatEmailAlreadyExistsException";
 import WrongCredentialsException from "../exceptions/WrongCredentialsException";
 import HttpException from "../exceptions/HttpException";
-import Controller from "../interfaces/controller.interface";
-import DataStoredInToken from "../interfaces/dataStoredInToken";
-import TokenData from "../interfaces/tokenData.interface";
+import IController from "../interfaces/controller.interface";
+import IDataStoredInToken from "../interfaces/dataStoredInToken";
+import ITokenData from "../interfaces/tokenData.interface";
 import validationMiddleware from "../middleware/validation.middleware";
 import IUser from "../user/user.interface";
 import userModel from "./../user/user.model";
@@ -14,9 +14,9 @@ import CreateUserDto from "../user/user.dto";
 import LogInDto from "./logIn.dto";
 import { OAuth2Client } from "google-auth-library";
 import IGoogleUserInfo from "interfaces/googleUserInfo.interface";
-import RequestWithUser from "interfaces/requestWithUser.interface";
+import IRequestWithUser from "interfaces/requestWithUser.interface";
 
-export default class AuthenticationController implements Controller {
+export default class AuthenticationController implements IController {
     public path = "/auth";
     public router = Router();
     private user = userModel;
@@ -46,7 +46,7 @@ export default class AuthenticationController implements Controller {
                     password: hashedPassword,
                 });
                 user.password = undefined;
-                const tokenData: TokenData = this.createToken(user);
+                const tokenData: ITokenData = this.createToken(user);
                 res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
                 res.send(user);
             }
@@ -55,11 +55,11 @@ export default class AuthenticationController implements Controller {
         }
     };
 
-    private silentLogin = async (req: RequestWithUser, res: Response) => {
+    private silentLogin = async (req: IRequestWithUser, res: Response) => {
         const cookies = req.cookies;
         if (cookies && cookies.Authorization) {
             const secret = process.env.JWT_SECRET;
-            const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
+            const verificationResponse = jwt.verify(cookies.Authorization, secret) as IDataStoredInToken;
             if (verificationResponse && verificationResponse._id) {
                 const id = verificationResponse._id;
                 const user = await userModel.findById(id);
@@ -129,7 +129,7 @@ export default class AuthenticationController implements Controller {
                                     role_bits: 0,
                                 })
                                 .then(user => {
-                                    const tokenData: TokenData = this.createToken(user);
+                                    const tokenData: ITokenData = this.createToken(user);
                                     res.setHeader("Set-Cookie", [this.createCookie(tokenData)]);
                                     res.send(user);
                                 });
@@ -144,15 +144,15 @@ export default class AuthenticationController implements Controller {
         }
     };
 
-    private createCookie(tokenData: TokenData) {
+    private createCookie(tokenData: ITokenData) {
         return `Authorization=${tokenData.token}; SameSite=None; HttpOnly; Secure;  Path=/; Max-Age=${tokenData.expiresIn}`;
     }
 
-    private createToken(user: IUser): TokenData {
+    private createToken(user: IUser): ITokenData {
         const expiresIn = 24 * 60 * 60; // 1 day
         // const expiresIn = 30; // for test
         const secret = process.env.JWT_SECRET;
-        const dataStoredInToken: DataStoredInToken = {
+        const dataStoredInToken: IDataStoredInToken = {
             _id: user._id.toString(),
         };
         return {

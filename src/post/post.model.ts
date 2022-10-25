@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import Post from "./post.interface";
+import IPost from "./post.interface";
 
-const postSchema = new Schema<Post>(
+const postSchema = new Schema<IPost>(
     {
         author: {
             ref: "User",
@@ -12,6 +12,6 @@ const postSchema = new Schema<Post>(
     { versionKey: false },
 );
 
-const postModel = model<Post>("Post", postSchema);
+const postModel = model<IPost>("Post", postSchema);
 
 export default postModel;

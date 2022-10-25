@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import Controller from "../interfaces/controller.interface";
+import IController from "../interfaces/controller.interface";
 import CreateRecipeDto from "./recipe.dto";
 import HttpException from "../exceptions/HttpException";
 import IdNotValidException from "../exceptions/IdNotValidException";
 import IRecipe from "./recipe.interface";
 import RecipeNotFoundException from "../exceptions/RecipeNotFoundException";
-import RequestWithUser from "../interfaces/requestWithUser.interface";
+import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import { Types } from "mongoose";
 import authMiddleware from "../middleware/auth.middleware";
 import recipeModel from "./recipe.model";
 import validationMiddleware from "../middleware/validation.middleware";
 
-export default class RecipeController implements Controller {
+export default class RecipeController implements IController {
     public path = "/recipes";
     public router = Router();
     private recipeM = recipeModel;
@@ -107,7 +107,7 @@ export default class RecipeController implements Controller {
         }
     };
 
-    private createRecipe = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    private createRecipe = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         try {
             const recipeData: IRecipe = req.body;
             const createdRecipe = new this.recipeM({

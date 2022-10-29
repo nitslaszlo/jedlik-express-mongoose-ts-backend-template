@@ -10,7 +10,7 @@ export default class CreateUserDto {
     @IsEmail()
     public email: string;
 
-    @Match("email", { message: "Password and confirm password don't match." })
+    @Match("email", { message: "E-mail and confirmed e-mail don't match." })
     public email_address_confirm: string;
 
     @IsBoolean()

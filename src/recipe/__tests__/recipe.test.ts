@@ -3,7 +3,7 @@ import App from "../../app";
 import AuthenticationController from "../../authentication/authentication.controller";
 import RecipeController from "../../recipe/recipe.controller";
 import validateEnv from "../../utils/validateEnv";
-import * as request from "supertest";
+import request from "supertest";
 
 validateEnv();
 

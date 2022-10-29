@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import * as express from "express";
+import express from "express";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import InsufficientRoleException from "../exceptions/InsufficientRoleException";
 

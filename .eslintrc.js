@@ -22,6 +22,7 @@ module.exports = {
     ],
     rules: {
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         // "space-before-function-paren": ["error", "never"],
         // "no-return-assign": "off",
         // "unicode-bom": ["error", "never"],

@@ -1,9 +1,9 @@
-import * as favicon from "serve-favicon";
-import * as path from "path";
-import * as cookieParser from "cookie-parser";
-import * as express from "express";
-import * as mongoose from "mongoose";
-import * as cors from "cors";
+import favicon from "serve-favicon";
+import path from "path";
+import cookieParser from "cookie-parser";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 import IController from "./interfaces/controller.interface";
 import errorMiddleware from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/logger.middleware";

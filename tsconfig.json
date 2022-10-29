@@ -10,10 +10,12 @@
     "importHelpers": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    // "esModuleInterop": true,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true,
     "types": [
       "node",
       "jest"

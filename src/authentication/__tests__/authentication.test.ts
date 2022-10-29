@@ -5,7 +5,7 @@ import AuthenticationController from "../../authentication/authentication.contro
 // import ReportController from "../../report/report.controller";
 // import UserController from "../../user/user.controller";
 import validateEnv from "../../utils/validateEnv";
-import * as request from "supertest";
+import request from "supertest";
 
 validateEnv();
 

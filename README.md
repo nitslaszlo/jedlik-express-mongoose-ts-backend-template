@@ -1,11 +1,11 @@
 # jedlik-express-mongoose-ts-backend-template
 
 This template made on the basis of [Express Typescript tutorial](https://wanago.io/courses/typescript-express-tutorial/).
-NODE.JS version: v14.17.6
+NODE.JS version: v16.17.0
 
 # Links (technologies, software)
-## Heroku link:
-https://jedlik-expr-mongoose-backend.herokuapp.com/
+## Hosted on cyclic - link:
+https://jedlik-backend.cyclic.app/
 
 ## Express
 [Express](https://expressjs.com/) is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.

@@ -1,6 +1,6 @@
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { Router, Request, Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import UserWithThatEmailAlreadyExistsException from "../exceptions/UserWithThatEmailAlreadyExistsException";
 import WrongCredentialsException from "../exceptions/WrongCredentialsException";
 import HttpException from "../exceptions/HttpException";

@@ -37,15 +37,16 @@ export default class App {
         }
         this.app.use(express.json());
         this.app.use(cookieParser());
-        // Enabled CORS:
+
+        // Enabled CORS (Cross-Origin Resource Sharing):
         this.app.use(
             cors({
-                origin: ["https://jedlik-vite-quasar-template.netlify.app", "https://jedlik-vite-ts-template.netlify.app", "http://localhost:8080", "http://127.0.0.1:8080"],
-                allowedHeaders: ["Content-Type", "Authorization", "Cache-Control", "Content-Language", "Expires", "Last-Modified", "Pragma"],
+                origin: ["https://jedlik-vite-quasar-template.netlify.app", "ttps://jedlik-vite-ts-template.netlify.app", "http://localhost:8080", "http://127.0.0.1:8080"],
                 credentials: true,
-                exposedHeaders: ["Set-Cookie"],
             }),
         );
+
+        this.app.set("trust proxy", 1); // trust first proxy (If you have your node.js behind a proxy and are using secure: true, you need to set "trust proxy" in express)
         this.app.use(loggerMiddleware);
     }
 

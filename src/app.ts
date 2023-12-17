@@ -62,6 +62,7 @@ export default class App {
 
     private connectToTheDatabase() {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
+        mongoose.set("strictQuery", true);
         // Connect to MongoDB Atlas, create database if not exist::
         mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`).catch(err => {
             if (err) {

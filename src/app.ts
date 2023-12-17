@@ -41,7 +41,7 @@ export default class App {
         // Enabled CORS (Cross-Origin Resource Sharing):
         this.app.use(
             cors({
-                origin: ["https://jedlik-vite-quasar-template.netlify.app", "ttps://jedlik-vite-ts-template.netlify.app", "http://localhost:8080", "http://127.0.0.1:8080"],
+                origin: ["https://jedlik-vite-quasar-template.netlify.app", "https://jedlik-vite-ts-template.netlify.app", "http://localhost:8080", "http://127.0.0.1:8080"],
                 credentials: true,
             }),
         );
@@ -63,7 +63,7 @@ export default class App {
     private connectToTheDatabase() {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DB } = process.env;
         // Connect to MongoDB Atlas, create database if not exist::
-        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`, err => {
+        mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}${MONGO_DB}?retryWrites=true&w=majority`).catch(err => {
             if (err) {
                 console.log("Unable to connect to the server. Please start MongoDB.");
             }

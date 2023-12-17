@@ -51,7 +51,7 @@ export default class PostController implements IController {
             let count = 0;
             if (req.params.keyword && req.params.keyword != "") {
                 const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
-                count = await this.post.find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] }).count();
+                count = await this.post.countDocuments({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] });
                 posts = await this.post
                     .find({ $or: [{ title: { $regex: regex } }, { content: { $regex: regex } }] })
                     .sort(`${sort == -1 ? "-" : ""}${order}`)

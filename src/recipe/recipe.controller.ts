@@ -50,7 +50,7 @@ export default class RecipeController implements IController {
             let count = 0;
             if (req.params.keyword) {
                 const regex = new RegExp(req.params.keyword, "i"); // i for case insensitive
-                count = await this.recipeM.find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] }).count();
+                count = await this.recipeM.countDocuments({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] });
                 recipes = await this.recipeM
                     .find({ $or: [{ recipeName: { $regex: regex } }, { description: { $regex: regex } }] })
                     .sort(`${sort == -1 ? "-" : ""}${order}`)
